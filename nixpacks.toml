@@ -1,0 +1,8 @@
+[package]
+name = "contrato-express"
+channels = ["nixpkgs/nixos-23.11"]
+packages = ["nodejs_20", "npm"]
+
+[phases.build]
+command = "npm ci && npm run build"
+
