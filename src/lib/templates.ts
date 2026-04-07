@@ -122,7 +122,7 @@ ______________________________
 [CLIENTE_NOME]`,
   },
   {
-    id: ' retainer',
+    id: 'retainer',
     name: 'Contrato de Retainer',
     description: 'Contrato de retainer para serviços continuados.',
     category: 'Contratos de Retainer',
@@ -227,7 +227,7 @@ export function renderTemplate(template: typeof TEMPLATES[0], formData: Record<s
   let content = template.content;
   for (const [key, value] of Object.entries(formData)) {
     const placeholder = `[${key.toUpperCase()}]`;
-    content = content.replace(new RegExp(placeholder, 'g', ), value || '[não informado]');
+    content = content.replace(new RegExp(placeholder, 'g'), value || '[não informado]');
   }
   return content;
 }
