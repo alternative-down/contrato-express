@@ -1,3 +1,5 @@
+// Build env: DATABASE_URL must be set in Coolify (build-time env var)
+// Production: file:./data/contrato-express.db
 import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({
@@ -5,6 +7,6 @@ export default defineConfig({
   out: './drizzle',
   dialect: 'sqlite',
   dbCredentials: {
-    url: './data/contrato-express.db',
+    url: process.env.DATABASE_URL || './data/contrato-express.db',
   },
 });
