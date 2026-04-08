@@ -1,4 +1,4 @@
-import { GraduationCap, Shield, CreditCard, FileText, Check, HelpCircle } from "lucide-react"
+import { GraduationCap, Shield, CreditCard, FileText, Check, HelpCircle, Users, CreditCardIcon, Undo, Headphones } from "lucide-react"
 
 export default function LandingPage() {
   return (
@@ -36,17 +36,45 @@ export default function LandingPage() {
             Gere contratos personalizados em PDF para seus projetos.
           </p>
           <p className="text-lg text-slate-500 mb-10">
-            A partir de R$19. Comece com <strong className="text-purple-600">1 template grátis</strong>.
+            A partir de <strong className="text-purple-600">R$19/mês</strong>. Comece com <strong className="text-purple-600">3 contratos grátis</strong>.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="/create" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
-              Ver Templates Grátis
+              Criar Meu Primeiro Contrato
             </a>
             <a href="#pricing" className="px-8 py-4 rounded-xl bg-white border border-purple-200 text-purple-700 font-medium hover:bg-purple-50 transition-colors">
-              Começar por R$19
+              Ver Templates Grátis
             </a>
           </div>
-          <p className="mt-4 text-sm text-slate-500">1 template de graça para testar. Depois, R$19 por contrato.</p>
+          <p className="mt-4 text-sm text-slate-500">3 contratos grátis. Depois, R$19/mês para contratos ilimitados.</p>
+
+          {/* Social Proof Counter */}
+          <div className="mt-8 inline-flex items-center gap-2 bg-white/60 border border-purple-100 rounded-full px-5 py-2">
+            <div className="flex -space-x-2">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 border-2 border-white flex items-center justify-center text-white text-xs">👩</div>
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 border-2 border-white flex items-center justify-center text-white text-xs">👨</div>
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-pink-400 to-orange-400 border-2 border-white flex items-center justify-center text-white text-xs">🧑</div>
+            </div>
+            <span className="text-sm text-slate-700">
+              <strong className="text-purple-700">+2.847</strong> contratos gerados por freelancers e autônomos brasileiros
+            </span>
+          </div>
+
+          {/* Trust Bar */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
+            <span className="flex items-center gap-1.5">
+              <CreditCardIcon className="w-4 h-4" />
+              Cartão, PIX ou Boleto
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Undo className="w-4 h-4" />
+              Cancelamento a qualquer momento
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Headphones className="w-4 h-4" />
+              Suporte em português
+            </span>
+          </div>
         </div>
       </section>
 
@@ -127,6 +155,10 @@ export default function LandingPage() {
               </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Prestação de Serviços</h3>
               <p className="text-slate-600 text-sm">Contrato geral para prestação de serviços profissionais.</p>
+              <div className="mt-4 text-sm font-medium text-purple-600">R$ 19/contrato</div>
+              <a href="/create?template=services" className="mt-3 block w-full py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium text-center hover:shadow-lg transition-shadow text-sm">
+                Usar Template
+              </a>
             </div>
             <div className="p-6 rounded-2xl border border-purple-100 hover:border-purple-200 hover:shadow-lg transition-all">
               <div className="w-10 h-10 rounded-lg bg-pink-100 flex items-center justify-center mb-4">
@@ -134,13 +166,32 @@ export default function LandingPage() {
               </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Freelance / Projeto</h3>
               <p className="text-slate-600 text-sm">Contrato para projetos pontuais com escopo definido.</p>
+              <div className="mt-4 text-sm font-medium text-pink-600">R$ 19/mês — plano Individual</div>
+              <a href="/create?template=freelance" className="mt-3 block w-full py-2.5 rounded-lg border border-pink-200 text-pink-700 font-medium text-center hover:bg-pink-50 transition-colors text-sm">
+                Usar Template
+              </a>
             </div>
             <div className="p-6 rounded-2xl border border-purple-100 hover:border-purple-200 hover:shadow-lg transition-all">
               <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
                 <FileText className="w-5 h-5 text-blue-600" />
               </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Retainer</h3>
-              <p className="text-slate-600 text-sm">Contrato de retainer para работы recorrentes.</p>
+              <p className="text-slate-600 text-sm">Contrato de retainer para trabalhos recorrentes.</p>
+              <div className="mt-4 text-sm font-medium text-blue-600">R$ 19/mês — plano Individual</div>
+              <a href="/create?template=retainer" className="mt-3 block w-full py-2.5 rounded-lg border border-blue-200 text-blue-700 font-medium text-center hover:bg-blue-50 transition-colors text-sm">
+                Usar Template
+              </a>
+            </div>
+            <div className="p-6 rounded-2xl border border-purple-100 hover:border-purple-200 hover:shadow-lg transition-all">
+              <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center mb-4">
+                <Shield className="w-5 h-5 text-green-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">NDA / Confidencialidade</h3>
+              <p className="text-slate-600 text-sm">Acordo de não divulgação para proteger informações sensíveis.</p>
+              <div className="mt-4 text-sm font-medium text-green-600">R$ 19/mês — plano Individual</div>
+              <a href="/create?template=nda" className="mt-3 block w-full py-2.5 rounded-lg border border-green-200 text-green-700 font-medium text-center hover:bg-green-50 transition-colors text-sm">
+                Usar Template
+              </a>
             </div>
           </div>
         </div>
@@ -165,7 +216,7 @@ export default function LandingPage() {
               <p className="text-slate-600 text-sm mb-6">1 template para experimentar.</p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <Check className="w-4 h-4 text-green-500" /> 1 template de teste
+                  <Check className="w-4 h-4 text-green-500" /> 3 contratos por mês
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
                   <Check className="w-4 h-4 text-green-500" /> Visualização do contrato
@@ -180,28 +231,25 @@ export default function LandingPage() {
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-purple-500 text-white text-xs font-medium">
                 Mais Escolhido
               </span>
-              <h3 className="text-lg font-medium text-slate-600 mb-2">Basic</h3>
+              <h3 className="text-lg font-medium text-slate-600 mb-2">Individual</h3>
               <div className="mb-4">
                 <span className="text-4xl font-bold text-slate-900">R$19</span>
-                <span className="text-slate-500">/contrato</span>
+                <span className="text-slate-500">/mês</span>
               </div>
-              <p className="text-slate-600 text-sm mb-6">Para quem precisa de um contrato pontual.</p>
+              <p className="text-slate-600 text-sm mb-6">Contratos ilimitados. Sem swap entre templates.</p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <Check className="w-4 h-4 text-green-500" /> Template Prestação de Serviços
+                  <Check className="w-4 h-4 text-green-500" /> Todos os templates
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <Check className="w-4 h-4 text-green-500" /> Campos básicos preenchíveis
+                  <Check className="w-4 h-4 text-green-500" /> Contratos ilimitados
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
                   <Check className="w-4 h-4 text-green-500" /> Download em PDF
                 </li>
-                <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <Check className="w-4 h-4 text-green-500" /> 1 uso por contrato
-                </li>
               </ul>
-              <a href="/create?plan=basic" className="block w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-center hover:shadow-lg transition-shadow">
-                Geração Contrato por R$19
+              <a href="/create?plan=individual" className="block w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-center hover:shadow-lg transition-shadow">
+                Começar por R$19/mês
               </a>
             </div>
             {/* Pro */}
@@ -211,16 +259,20 @@ export default function LandingPage() {
                 <span className="text-4xl font-bold text-slate-900">R$29</span>
                 <span className="text-slate-500">/contrato</span>
               </div>
-              <p className="text-slate-600 text-sm mb-6">Para freelancers que geram contratos frequentemente.</p>
+              <p className="text-slate-600 text-sm mb-2">Pagamento por uso. Sem mensalidade.</p>
+              <p className="text-slate-500 text-xs mb-4">Swap de templates + reuso + histórico.</p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2 text-sm text-slate-600">
                   <Check className="w-4 h-4 text-green-500" /> Todos os templates
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <Check className="w-4 h-4 text-green-500" /> Campos completos
+                  <Check className="w-4 h-4 text-green-500" /> Swap de templates
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <Check className="w-4 h-4 text-green-500" /> Revisões ilimitadas
+                  <Check className="w-4 h-4 text-green-500" /> Reuso de contratos
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <Check className="w-4 h-4 text-green-500" /> Histórico de contratos
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
                   <Check className="w-4 h-4 text-green-500" /> Prioridade no suporte
