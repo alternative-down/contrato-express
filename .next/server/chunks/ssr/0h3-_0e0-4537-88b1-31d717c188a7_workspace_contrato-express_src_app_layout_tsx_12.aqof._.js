@@ -1,3 +1,0 @@
-module.exports=[99663,a=>{"use strict";var b=a.i(56089);a.s(["default",0,function({children:a}){return(0,b.jsx)("html",{lang:"pt-BR",children:(0,b.jsx)("body",{children:a})})},"metadata",0,{title:"Contrato Express - Contratos Profissionais para Freelancers",description:"Gere contratos personalizados em PDF. R$19 por contrato. Sem advogado."}])},82245,a=>{a.n(a.i(99663))}];
-
-//# sourceMappingURL=0h3-_0e0-4537-88b1-31d717c188a7_workspace_contrato-express_src_app_layout_tsx_12.aqof._.js.map
