@@ -1,0 +1,3 @@
+module.exports=[30481,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(45638);a.n(d("[project]/workspaces/4b8fc867-30e0-4537-88b1-31d717c188a7/workspace/contrato-express/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},71454,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(45638);a.n(d("[project]/workspaces/4b8fc867-30e0-4537-88b1-31d717c188a7/workspace/contrato-express/node_modules/next/dist/client/components/builtin/global-error.js"))},89596,a=>{"use strict";a.i(30481);var b=a.i(71454);a.n(b)},83479,a=>{a.n(a.i(89596))}];
+
+//# sourceMappingURL=0tav_next_dist_client_components_builtin_global-error_01s0pk~.js.map

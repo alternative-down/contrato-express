@@ -1,0 +1,17 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/auth/login/route": "/api/auth/login",
+  "/api/auth/me/route": "/api/auth/me",
+  "/api/auth/signup/route": "/api/auth/signup",
+  "/api/checkout/route": "/api/checkout",
+  "/api/templates/route": "/api/templates",
+  "/app/page": "/app",
+  "/checkout/[templateId]/page": "/checkout/[templateId]",
+  "/login/page": "/login",
+  "/page": "/",
+  "/pricing/page": "/pricing",
+  "/signup/page": "/signup",
+  "/templates/[templateId]/page": "/templates/[templateId]",
+  "/templates/page": "/templates"
+}

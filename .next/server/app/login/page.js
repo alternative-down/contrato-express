@@ -1,0 +1,13 @@
+var R=require("../../chunks/ssr/[turbopack]_runtime.js")("server/app/login/page.js")
+R.c("server/chunks/ssr/[root-of-the-server]__0~.cog2._.js")
+R.c("server/chunks/ssr/0tav_next_dist_esm_build_templates_app-page_06v579p.js")
+R.c("server/chunks/ssr/[root-of-the-server]__0uttoqi._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__0g3584x._.js")
+R.c("server/chunks/ssr/0h3-_0e0-4537-88b1-31d717c188a7_workspace_contrato-express_src_app_layout_tsx_12.aqof._.js")
+R.c("server/chunks/ssr/0tav_next_dist_client_components_049mqul._.js")
+R.c("server/chunks/ssr/0tav_next_dist_client_components_builtin_forbidden_055.6bg.js")
+R.c("server/chunks/ssr/0tav_next_dist_client_components_builtin_unauthorized_0rydcvg.js")
+R.c("server/chunks/ssr/0tav_next_dist_client_components_builtin_global-error_01s0pk~.js")
+R.c("server/chunks/ssr/0kio_workspace_contrato-express__next-internal_server_app_login_page_actions_07sh8mf.js")
+R.m(34126)
+module.exports=R.m(34126).exports
