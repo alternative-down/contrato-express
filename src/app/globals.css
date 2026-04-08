@@ -12,3 +12,16 @@ body {
   background: linear-gradient(to bottom right, #faf5ff, #ffffff, #fdf2f8);
   min-height: 100vh;
 }
+
+/* Scrollbar thin for contract preview */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #9333ea, #ec4899);
+  border-radius: 3px;
+}

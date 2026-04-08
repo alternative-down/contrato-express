@@ -183,9 +183,23 @@ export default function TemplateDetailPage({ params }: PageProps) {
           {/* Preview */}
           <div className="bg-white rounded-2xl shadow-sm border border-purple-100 p-6">
             <h2 className="font-semibold text-slate-900 mb-4">Preview do Contrato</h2>
-            <div className="bg-slate-50 rounded-xl p-6 min-h-[400px]">
+            <div className="bg-slate-100 rounded-xl p-6 min-h-[400px]">
               {preview ? (
-                <pre className="text-sm text-slate-700 whitespace-pre-wrap font-sans">{preview}</pre>
+                <div className="bg-white border border-slate-200 rounded shadow-sm p-8 max-h-[600px] overflow-y-auto scrollbar-thin">
+                  <pre className="text-sm text-slate-700 whitespace-pre-wrap font-serif leading-relaxed">
+                    {preview}
+                  </pre>
+                  <div className="mt-8 space-y-8">
+                    <div>
+                      <div className="border-b border-dashed border-slate-400 mb-1"></div>
+                      <p className="text-xs text-slate-500 text-center">Assinatura do Prestador(a)</p>
+                    </div>
+                    <div>
+                      <div className="border-b border-dashed border-slate-400 mb-1"></div>
+                      <p className="text-xs text-slate-500 text-center">Assinatura do Contratante(a)</p>
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <p className="text-slate-400 text-center py-12">
                   Preencha os campos e clique em "Ver Preview" para visualizar o contrato.
