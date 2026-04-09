@@ -42,8 +42,8 @@ export default function LandingPage() {
             <a href="/create" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
               Criar Meu Primeiro Contrato
             </a>
-            <a href="#pricing" className="px-8 py-4 rounded-xl bg-white border border-purple-200 text-purple-700 font-medium hover:bg-purple-50 transition-colors">
-              Ver Planos e Templates
+            <a href="#templates" className="px-8 py-4 rounded-xl bg-white border border-purple-200 text-purple-700 font-medium hover:bg-purple-50 transition-colors">
+              Ver Templates
             </a>
           </div>
           <p className="mt-4 text-sm text-slate-500">3 contratos-grátis para testar. Depois, <strong className="text-purple-600">R$19 por contrato</strong> — sem plano, sem mensalidade.</p>
@@ -226,7 +226,7 @@ export default function LandingPage() {
               <p className="text-slate-600 text-sm mb-6">1 template para experimentar.</p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <Check className="w-4 h-4 text-green-500" /> 3 contratos por mês
+                  <Check className="w-4 h-4 text-green-500" /> 3 contratos-grátis para testar
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
                   <Check className="w-4 h-4 text-green-500" /> Visualização do contrato
@@ -344,8 +344,8 @@ export default function LandingPage() {
           <p className="text-lg text-slate-600 mb-8">
             Gere seu primeiro contrato profissional em minutos.
           </p>
-          <a href="/create" className="inline-block px-10 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
-            Ver Planos e Templates
+          <a href="/templates" className="inline-block px-10 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
+            Ver Templates
           </a>
         </div>
       </section>
