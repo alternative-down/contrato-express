@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { db } from '@/db';
-import { users } from '@/db/schema';
+import { users, contracts } from '@/db/schema';
 import { verifyToken } from '@/lib/auth';
-import { eq } from 'drizzle-orm';
+import { eq, desc } from 'drizzle-orm';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,20 +21,43 @@ export default async function ProtectedAppPage() {
     redirect('/login');
   }
 
-  const result = await db.select().from(users).where(eq(users.id, payload.userId)).limit(1);
-  const user = result[0];
+  const [userResult, contractResult] = await Promise.all([
+    db.select().from(users).where(eq(users.id, payload.userId)).limit(1),
+    db.select().from(contracts).where(eq(contracts.userId, payload.userId)).orderBy(desc(contracts.createdAt)).limit(5),
+  ]);
 
+  const user = userResult[0];
   if (!user) {
     redirect('/login');
   }
 
+  const recentContracts = contractResult.map(c => ({
+    id: c.id,
+    templateId: c.templateId,
+    planType: c.planType,
+    status: c.status,
+    amount: c.amount,
+    createdAt: c.createdAt,
+  }));
+
+  const formatDate = (dateStr: Date | string) => {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+  };
+
+  const statusLabel: Record<string, string> = {
+    draft: 'Rascunho',
+    completed: 'Completo',
+    paid: 'Pago',
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
-      <header className="bg-white border-b border-purple-100">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-purple-600 to-pink-500">
-              <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-purple-100">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
@@ -42,6 +65,9 @@ export default async function ProtectedAppPage() {
           </div>
           <div className="flex items-center gap-4">
             <span className="text-sm text-slate-600">{user.email}</span>
+            <Link href="/history" className="text-sm font-medium text-purple-600 hover:text-purple-700">
+              Histórico
+            </Link>
             <Link href="/" className="text-sm font-medium text-slate-600 hover:text-purple-600">
               Início
             </Link>
@@ -55,14 +81,56 @@ export default async function ProtectedAppPage() {
           <p className="mt-1 text-slate-500">Bem-vindo, {user.name || user.email}</p>
         </div>
 
-        <div className="rounded-2xl border border-purple-100 bg-white p-12 text-center shadow-sm">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100">
-            <svg className="h-8 w-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        {recentContracts.length > 0 ? (
+          <div className="space-y-4 mb-8">
+            <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Contratos Recentes</h2>
+            {recentContracts.map((c) => (
+              <div key={c.id} className="rounded-xl border border-purple-100 bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md hover:border-purple-200 transition">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${c.planType === 'basic' ? 'bg-purple-50 text-purple-600' : 'bg-pink-50 text-pink-600'}`}>
+                      {c.planType.toUpperCase()}
+                    </span>
+                    <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${
+                      c.status === 'paid' ? 'bg-blue-100 text-blue-700' :
+                      c.status === 'completed' ? 'bg-green-100 text-green-700' :
+                      'bg-yellow-100 text-yellow-700'
+                    }`}>
+                      {statusLabel[c.status] || c.status}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="font-medium text-slate-900 capitalize">{c.templateId.replace(/-/g, ' ')}</p>
+                    <p className="text-xs text-slate-400">{formatDate(c.createdAt)}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="font-semibold text-slate-900">R$ {c.amount}</span>
+                  <Link href={`/templates/${c.templateId}?edit=${c.id}`} className="text-sm font-medium text-purple-600 hover:text-purple-700 flex items-center gap-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    Editar
+                  </Link>
+                </div>
+              </div>
+            ))}
+            {recentContracts.length >= 5 && (
+              <Link href="/history" className="inline-flex items-center gap-1 text-sm font-medium text-purple-600 hover:text-purple-700">
+                Ver todos os contratos →
+              </Link>
+            )}
+          </div>
+        ) : null}
+
+        <div className="rounded-2xl border border-purple-100 bg-white p-8 text-center shadow-sm">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-purple-100">
+            <svg className="h-7 w-7 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
           </div>
-          <h2 className="mb-2 text-lg font-semibold text-slate-900">Nenhum contrato ainda</h2>
-          <p className="mb-6 text-slate-500">Comece gerando seu primeiro contrato profissional</p>
+          <h2 className="mb-2 text-lg font-semibold text-slate-900">Gerar Novo Contrato</h2>
+          <p className="mb-5 text-slate-500">Escolha um template e crie seu contrato profissional</p>
           <Link
             href="/templates"
             className="inline-flex rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 px-6 py-3 font-semibold text-white transition hover:opacity-90"
