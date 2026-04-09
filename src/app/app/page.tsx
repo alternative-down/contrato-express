@@ -96,7 +96,7 @@ export default async function ProtectedAppPage() {
                       c.status === 'completed' ? 'bg-green-100 text-green-700' :
                       'bg-yellow-100 text-yellow-700'
                     }`}>
-                      {statusLabel[c.status] || c.status}
+                      {c.status ? (statusLabel[c.status] || c.status) : '—'}
                     </span>
                   </div>
                   <div>
