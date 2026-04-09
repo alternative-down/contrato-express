@@ -1,9 +1,15 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export const metadata = {
-  title: 'Preços - Contrato Express',
-  description: 'Sem mensalidade. Pague apenas pelo contrato que precisa. R$19 por contrato.',
+  title: "Preços - Contrato Express",
+  description: "Sem mensalidade. Pague apenas pelo contrato que precisa. R$19 por contrato.",
 };
+
+const CheckIcon = ({ color = "text-green-500" }: { color?: string }) => (
+  <svg className={`w-4 h-4 ${color} flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+  </svg>
+);
 
 export default function PricingPage() {
   return (
@@ -33,26 +39,27 @@ export default function PricingPage() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {/* Grátis */}
+          {/* Trial */}
           <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             <div className="p-6">
-              <h2 className="text-lg font-semibold text-slate-900 mb-1">Grátis</h2>
-              <p className="text-slate-500 text-sm mb-4">Para testar</p>
+              <h2 className="text-lg font-semibold text-slate-900 mb-1">Trial</h2>
+              <p className="text-slate-500 text-sm mb-4">3 contratos para testar</p>
               <div className="mb-6">
-                <span className="text-3xl font-bold text-slate-900">R$ 0</span>
+                <span className="text-3xl font-bold text-slate-900">Grátis</span>
               </div>
               <ul className="space-y-2 mb-6">
-                {['1 template para testar', 'Visualizar antes de pagar', 'Uso único'].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-slate-600">
-                    <svg className="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon /> 3 contratos (1 de cada template)
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon /> Visualizar antes de pagar
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon /> Sem cadastro obrigatório
+                </li>
               </ul>
-              <Link href="/templates" className="block w-full py-2 text-center border border-purple-200 text-purple-700 font-semibold rounded-xl hover:border-purple-300 transition text-sm">
-                Testar Grátis
+              <Link href="/templates" className="block w-full py-3 text-center border border-purple-200 text-purple-700 font-semibold rounded-xl hover:bg-purple-50 transition text-sm">
+                Começar Grátis
               </Link>
             </div>
           </div>
@@ -64,48 +71,59 @@ export default function PricingPage() {
             </div>
             <div className="p-6">
               <h2 className="text-lg font-semibold text-slate-900 mb-1">Basic</h2>
-              <p className="text-slate-500 text-sm mb-4">Para freelancers</p>
+              <p className="text-slate-500 text-sm mb-4">Pagamento por uso — sem mensalidade</p>
               <div className="mb-6">
                 <span className="text-3xl font-bold text-slate-900">R$ 19</span>
                 <span className="text-slate-500 text-sm"> / contrato</span>
               </div>
               <ul className="space-y-2 mb-6">
-                {['1 tipo de contrato', 'Campos básicos', 'PDF personalizado', 'Uso único'].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-slate-600">
-                    <svg className="w-4 h-4 text-purple-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon color="text-purple-500" /> Todos os 3 templates Basic
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon color="text-purple-500" /> Campos personalizáveis
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon color="text-purple-500" /> PDF profissional
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon color="text-purple-500" /> Sem mensalidade
+                </li>
               </ul>
               <Link href="/templates" className="block w-full py-3 text-center bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold rounded-xl hover:opacity-90 transition">
-                Geração Contrato por R$ 19
+                Criar Contrato por R$ 19
               </Link>
             </div>
           </div>
 
           {/* Pro */}
-          <div className="bg-gradient-to-br from-purple-600 to-pink-500 rounded-2xl shadow-lg overflow-hidden text-white">
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             <div className="p-6">
-              <h2 className="text-lg font-semibold mb-1">Pro</h2>
-              <p className="text-purple-100 text-sm mb-4">Para profissionais</p>
+              <h2 className="text-lg font-semibold text-slate-900 mb-1">Pro</h2>
+              <p className="text-slate-500 text-sm mb-4">Para profissionais ativos</p>
               <div className="mb-6">
-                <span className="text-3xl font-bold">R$ 29</span>
-                <span className="text-purple-100 text-sm"> / contrato</span>
+                <span className="text-3xl font-bold text-slate-900">R$ 29</span>
+                <span className="text-slate-500 text-sm"> / contrato</span>
               </div>
               <ul className="space-y-2 mb-6">
-                {['Todos os tipos Basic', 'Contrato de Retainer', 'Revisões ilimitadas', 'Suporte prioritário'].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-purple-100">
-                    <svg className="w-4 h-4 text-pink-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon /> Todos os templates Basic
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon /> Templates Pro (NDA, Retainer)
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon /> Histórico de contratos
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon /> Revisões ilimitadas
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <CheckIcon /> Suporte prioritário
+                </li>
               </ul>
-              <Link href="/templates" className="block w-full py-3 text-center bg-white text-purple-600 font-semibold rounded-xl hover:bg-purple-50 transition">
-                Geração Contrato por R$ 29
+              <Link href="/templates" className="block w-full py-3 text-center border border-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 transition">
+                Criar Contrato por R$ 29
               </Link>
             </div>
           </div>

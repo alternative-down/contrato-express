@@ -1,4 +1,4 @@
-import { GraduationCap, Shield, CreditCard, FileText, Check, HelpCircle, Users, CreditCardIcon, Undo, Headphones, ShieldCheck } from "lucide-react"
+import { GraduationCap, Shield, CreditCard, FileText, Check, HelpCircle, Users, CreditCardIcon, Undo, Headphones, ShieldCheck, Lock } from "lucide-react"
 
 export default function LandingPage() {
   return (
@@ -35,18 +35,22 @@ export default function LandingPage() {
           <p className="text-xl text-slate-600 mb-4 max-w-2xl mx-auto">
             Gere contratos personalizados em PDF para seus projetos.
           </p>
-          <p className="text-lg text-slate-500 mb-10">
-            A partir de <strong className="text-purple-600">R$19/contrato</strong>. Sem mensalidade. Comece com <strong className="text-purple-600">3 contratos grátis</strong>.
+          <p className="text-lg text-slate-600 mb-10">
+            Gere contratos profissionais em PDF, sem advogado. Comece com <strong className="text-purple-600">3 gratuitos</strong>. Depois, <strong className="text-purple-600">R$19/contrato</strong>.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/create" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
-              Criar Meu Primeiro Contrato
+            <a href="/create?plan=free" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
+              Começar Grátis — 3 Contratos
             </a>
             <a href="#templates" className="px-8 py-4 rounded-xl bg-white border border-purple-200 text-purple-700 font-medium hover:bg-purple-50 transition-colors">
-              Ver Templates
+              Ver Todos os Templates
             </a>
           </div>
-          <p className="mt-4 text-sm text-slate-500">3 contratos-grátis para testar. Depois, <strong className="text-purple-600">R$19 por contrato</strong> — sem plano, sem mensalidade.</p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-slate-600">
+            <span className="flex items-center gap-1"><Check className="w-4 h-4 text-green-500" />3 contratos grátis</span>
+            <span className="flex items-center gap-1"><Check className="w-4 h-4 text-green-500" />Sem cartão</span>
+            <span className="flex items-center gap-1"><Check className="w-4 h-4 text-green-500" />Pronto em minutos</span>
+          </div>
 
           {/* Social Proof Counter */}
           <div className="mt-8 inline-flex items-center gap-2 bg-white/60 border border-purple-100 rounded-full px-5 py-2">
@@ -193,15 +197,20 @@ export default function LandingPage() {
               </a>
             </div>
             <div className="p-6 rounded-2xl border border-purple-100 hover:border-purple-200 hover:shadow-lg transition-all">
-              <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center mb-4">
-                <Shield className="w-5 h-5 text-green-600" />
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-medium text-purple-600 bg-purple-50 px-2 py-1 rounded-full">⭐ Freemium</span>
               </div>
-              <h3 className="text-lg font-semibold text-slate-900 mb-2">NDA / Confidencialidade</h3>
-              <p className="text-slate-600 text-sm">Acordo de não divulgação para proteger informações sensíveis.</p>
-              <div className="mt-4 text-sm font-medium text-green-600">R$ 19/contrato</div>
-              <a href="/create?template=nda" className="mt-3 block w-full py-2.5 rounded-lg border border-green-200 text-green-700 font-medium text-center hover:bg-green-50 transition-colors text-sm">
-                Usar Template
-              </a>
+              <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mb-4">
+                <Lock className="w-5 h-5 text-purple-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">Acordo de Confidencialidade (NDA)</h3>
+              <p className="text-slate-600 text-sm">Proteja ideias, termos e metodologias antes de fechar negócio. Essencial para freelas em design, dev e consultoria.</p>
+              <div className="mt-4 flex items-center justify-between">
+                <span className="text-sm font-medium text-green-600">Grátis no Basic</span>
+                <a href="/create?template=nda" className="mt-3 text-sm font-medium text-purple-600 hover:text-purple-700">
+                  Usar Template →
+                </a>
+              </div>
             </div>
           </div>
         </div>
