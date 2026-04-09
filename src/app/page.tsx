@@ -43,7 +43,7 @@ export default function LandingPage() {
               Criar Meu Primeiro Contrato
             </a>
             <a href="#pricing" className="px-8 py-4 rounded-xl bg-white border border-purple-200 text-purple-700 font-medium hover:bg-purple-50 transition-colors">
-              Ver Templates Grátis
+              Ver Planos e Templates
             </a>
           </div>
           <p className="mt-4 text-sm text-slate-500">3 contratos-grátis para testar. Depois, <strong className="text-purple-600">R$19 por contrato</strong> — sem plano, sem mensalidade.</p>
@@ -335,7 +335,7 @@ export default function LandingPage() {
             Gere seu primeiro contrato profissional em minutos.
           </p>
           <a href="/create" className="inline-block px-10 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
-            Ver Templates Grátis
+            Ver Planos e Templates
           </a>
         </div>
       </section>
