@@ -36,7 +36,7 @@ export default function LandingPage() {
             Gere contratos personalizados em PDF para seus projetos.
           </p>
           <p className="text-lg text-slate-500 mb-10">
-            A partir de <strong className="text-purple-600">R$19/mês</strong>. Comece com <strong className="text-purple-600">3 contratos grátis</strong>.
+            A partir de <strong className="text-purple-600">R$19/contrato</strong>. Sem mensalidade. Comece com <strong className="text-purple-600">3 contratos grátis</strong>.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="/create" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
@@ -46,7 +46,7 @@ export default function LandingPage() {
               Ver Templates Grátis
             </a>
           </div>
-          <p className="mt-4 text-sm text-slate-500">3 contratos grátis. Depois, R$19/mês para contratos ilimitados.</p>
+          <p className="mt-4 text-sm text-slate-500">3 contratos-grátis para testar. Depois, <strong className="text-purple-600">R$19 por contrato</strong> — sem plano, sem mensalidade.</p>
 
           {/* Social Proof Counter */}
           <div className="mt-8 inline-flex items-center gap-2 bg-white/60 border border-purple-100 rounded-full px-5 py-2">
@@ -97,7 +97,7 @@ export default function LandingPage() {
                 <CreditCard className="w-6 h-6 text-pink-600" />
               </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Custo Acessível</h3>
-              <p className="text-slate-600">Advogados cobram R$500 a R$2.000+ por contrato. Aqui você paga apenas R$19.</p>
+              <p className="text-slate-600">Advogados cobram R$500 a R$2.000+ por contrato. Aqui você paga apenas R$19 por contrato.</p>
             </div>
             <div className="p-6 rounded-2xl border border-purple-100 hover:border-purple-200 hover:shadow-lg transition-all">
               <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-4">
@@ -234,9 +234,9 @@ export default function LandingPage() {
               <h3 className="text-lg font-medium text-slate-600 mb-2">Individual</h3>
               <div className="mb-4">
                 <span className="text-4xl font-bold text-slate-900">R$19</span>
-                <span className="text-slate-500">/mês</span>
+                <span className="text-slate-500">/contrato</span>
               </div>
-              <p className="text-slate-600 text-sm mb-6">Contratos ilimitados. Sem swap entre templates.</p>
+              <p className="text-slate-600 text-sm mb-6">Sem mensalidade. Pague só pelo que usar.</p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2 text-sm text-slate-600">
                   <Check className="w-4 h-4 text-green-500" /> Todos os templates
@@ -249,7 +249,7 @@ export default function LandingPage() {
                 </li>
               </ul>
               <a href="/create?plan=individual" className="block w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-center hover:shadow-lg transition-shadow">
-                Começar por R$19/mês
+                Começar por R$19/contrato
               </a>
             </div>
             {/* Pro */}
