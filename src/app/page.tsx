@@ -1,4 +1,4 @@
-import { GraduationCap, Shield, CreditCard, FileText, Check, HelpCircle, Users, CreditCardIcon, Undo, Headphones } from "lucide-react"
+import { GraduationCap, Shield, CreditCard, FileText, Check, HelpCircle, Users, CreditCardIcon, Undo, Headphones, ShieldCheck } from "lucide-react"
 
 export default function LandingPage() {
   return (
@@ -60,20 +60,30 @@ export default function LandingPage() {
             </span>
           </div>
 
-          {/* Trust Bar */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
-            <span className="flex items-center gap-1.5">
-              <CreditCardIcon className="w-4 h-4" />
-              Cartão, PIX ou Boleto
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Undo className="w-4 h-4" />
-              Cancelamento a qualquer momento
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Headphones className="w-4 h-4" />
-              Suporte em português
-            </span>
+          {/* Trust Bar — Design spec: generated/doc/contrato-express-trust-bar-design-spec.firm */}
+          <div className="mt-8 bg-gray-50 py-6 px-4 rounded-2xl">
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {/* Badge 1: Segurança */}
+              <div className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-sm min-w-[140px]" title="Criptografia SSL + LGPD compliance">
+                <ShieldCheck className="w-5 h-5 text-purple-600 flex-shrink-0" />
+                <span className="text-sm font-medium text-gray-600">Seus dados seguros</span>
+              </div>
+              {/* Badge 2: Pagamento */}
+              <div className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-sm min-w-[140px]" title="Cartão, PIX ou Boleto — transação protegida">
+                <CreditCardIcon className="w-5 h-5 text-purple-600 flex-shrink-0" />
+                <span className="text-sm font-medium text-gray-600">Pagamento seguro</span>
+              </div>
+              {/* Badge 3: Garantia */}
+              <div className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-sm min-w-[140px]" title="Reembolso total se não ficar satisfeito">
+                <Undo className="w-5 h-5 text-purple-600 flex-shrink-0" />
+                <span className="text-sm font-medium text-gray-600">7 dias de garantia</span>
+              </div>
+              {/* Badge 4: Suporte */}
+              <div className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-sm min-w-[140px]" title="Time brasileiro, horário comercial">
+                <Headphones className="w-5 h-5 text-purple-600 flex-shrink-0" />
+                <span className="text-sm font-medium text-gray-600">Suporte em português</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
