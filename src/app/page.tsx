@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { GraduationCap, Shield, CreditCard, FileText, Check, HelpCircle, Users, CreditCardIcon, Undo, Headphones, ShieldCheck, Lock } from "lucide-react"
 
 export default function LandingPage() {
@@ -13,12 +14,12 @@ export default function LandingPage() {
             <span className="font-semibold text-slate-900">Contrato Express</span>
           </div>
           <div className="flex items-center gap-6 text-sm">
-            <a href="#templates" className="text-slate-600 hover:text-purple-600 transition-colors">Templates</a>
-            <a href="#pricing" className="text-slate-600 hover:text-purple-600 transition-colors">Preços</a>
-            <a href="#faq" className="text-slate-600 hover:text-purple-600 transition-colors">FAQ</a>
-            <a href="/create" className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium hover:shadow-lg transition-shadow">
+            <Link href="#templates" className="text-slate-600 hover:text-purple-600 transition-colors">Templates</Link>
+            <Link href="#pricing" className="text-slate-600 hover:text-purple-600 transition-colors">Preços</Link>
+            <Link href="#faq" className="text-slate-600 hover:text-purple-600 transition-colors">FAQ</Link>
+            <Link href="/create" className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium hover:shadow-lg transition-shadow">
               Começar
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
@@ -39,12 +40,12 @@ export default function LandingPage() {
             Gere contratos profissionais em PDF, sem advogado. Comece com <strong className="text-purple-600">3 gratuitos</strong>. Depois, <strong className="text-purple-600">R$19/contrato</strong>.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="/create?plan=free" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
+            <Link href="/create?plan=free" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
               Começar Grátis — 3 Contratos
-            </a>
-            <a href="#templates" className="px-8 py-4 rounded-xl bg-white border border-purple-200 text-purple-700 font-medium hover:bg-purple-50 transition-colors">
+            </Link>
+            <Link href="#templates" className="px-8 py-4 rounded-xl bg-white border border-purple-200 text-purple-700 font-medium hover:bg-purple-50 transition-colors">
               Ver Todos os Templates
-            </a>
+            </Link>
           </div>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-slate-600">
             <span className="flex items-center gap-1"><Check className="w-4 h-4 text-green-500" />3 contratos grátis</span>
@@ -60,7 +61,7 @@ export default function LandingPage() {
               <div className="w-7 h-7 rounded-full bg-gradient-to-br from-pink-400 to-orange-400 border-2 border-white flex items-center justify-center text-white text-xs">🧑</div>
             </div>
             <span className="text-sm text-slate-700">
-              <strong className="text-purple-700">+2.847</strong> contratos gerados por freelancers e autônomos brasileiros
+              Contratos gerados por freelancers e autônomos brasileiros
             </span>
           </div>
 
@@ -170,9 +171,9 @@ export default function LandingPage() {
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Prestação de Serviços</h3>
               <p className="text-slate-600 text-sm">Contrato geral para prestação de serviços profissionais.</p>
               <div className="mt-4 text-sm font-medium text-purple-600">R$ 19/contrato</div>
-              <a href="/create?template=services" className="mt-3 block w-full py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium text-center hover:shadow-lg transition-shadow text-sm">
+              <Link href="/create?template=services" className="mt-3 block w-full py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium text-center hover:shadow-lg transition-shadow text-sm">
                 Usar Template
-              </a>
+              </Link>
             </div>
             <div className="p-6 rounded-2xl border border-purple-100 hover:border-purple-200 hover:shadow-lg transition-all">
               <div className="w-10 h-10 rounded-lg bg-pink-100 flex items-center justify-center mb-4">
@@ -181,9 +182,9 @@ export default function LandingPage() {
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Freelance / Projeto</h3>
               <p className="text-slate-600 text-sm">Contrato para projetos pontuais com escopo definido.</p>
               <div className="mt-4 text-sm font-medium text-pink-600">R$ 19/contrato</div>
-              <a href="/create?template=freelance" className="mt-3 block w-full py-2.5 rounded-lg border border-pink-200 text-pink-700 font-medium text-center hover:bg-pink-50 transition-colors text-sm">
+              <Link href="/create?template=freelance" className="mt-3 block w-full py-2.5 rounded-lg border border-pink-200 text-pink-700 font-medium text-center hover:bg-pink-50 transition-colors text-sm">
                 Usar Template
-              </a>
+              </Link>
             </div>
             <div className="p-6 rounded-2xl border border-purple-100 hover:border-purple-200 hover:shadow-lg transition-all">
               <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
@@ -192,9 +193,9 @@ export default function LandingPage() {
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Retainer</h3>
               <p className="text-slate-600 text-sm">Contrato de retainer para trabalhos recorrentes.</p>
               <div className="mt-4 text-sm font-medium text-blue-600">R$ 19/contrato</div>
-              <a href="/create?template=retainer" className="mt-3 block w-full py-2.5 rounded-lg border border-blue-200 text-blue-700 font-medium text-center hover:bg-blue-50 transition-colors text-sm">
+              <Link href="/create?template=retainer" className="mt-3 block w-full py-2.5 rounded-lg border border-blue-200 text-blue-700 font-medium text-center hover:bg-blue-50 transition-colors text-sm">
                 Usar Template
-              </a>
+              </Link>
             </div>
             <div className="p-6 rounded-2xl border border-purple-100 hover:border-purple-200 hover:shadow-lg transition-all">
               <div className="flex items-center gap-2 mb-3">
@@ -207,9 +208,9 @@ export default function LandingPage() {
               <p className="text-slate-600 text-sm">Proteja ideias, termos e metodologias antes de fechar negócio. Essencial para freelas em design, dev e consultoria.</p>
               <div className="mt-4 flex items-center justify-between">
                 <span className="text-sm font-medium text-green-600">Grátis no Basic</span>
-                <a href="/create?template=nda" className="mt-3 text-sm font-medium text-purple-600 hover:text-purple-700">
+                <Link href="/create?template=nda" className="mt-3 text-sm font-medium text-purple-600 hover:text-purple-700">
                   Usar Template →
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -241,9 +242,9 @@ export default function LandingPage() {
                   <Check className="w-4 h-4 text-green-500" /> Visualização do contrato
                 </li>
               </ul>
-              <a href="/create" className="block w-full py-3 rounded-xl border border-purple-200 text-purple-700 font-medium text-center hover:bg-purple-50 transition-colors">
+              <Link href="/create" className="block w-full py-3 rounded-xl border border-purple-200 text-purple-700 font-medium text-center hover:bg-purple-50 transition-colors">
                 Começar Grátis
-              </a>
+              </Link>
             </div>
             {/* Basic */}
             <div className="p-6 rounded-2xl border-2 border-purple-500 bg-white relative">
@@ -267,9 +268,9 @@ export default function LandingPage() {
                   <Check className="w-4 h-4 text-green-500" /> Download em PDF
                 </li>
               </ul>
-              <a href="/create?plan=individual" className="block w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-center hover:shadow-lg transition-shadow">
+              <Link href="/create?plan=individual" className="block w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-center hover:shadow-lg transition-shadow">
                 Começar por R$19/contrato
-              </a>
+              </Link>
             </div>
             {/* Pro */}
             <div className="p-6 rounded-2xl border border-slate-200 bg-white">
@@ -297,9 +298,9 @@ export default function LandingPage() {
                   <Check className="w-4 h-4 text-green-500" /> Prioridade no suporte
                 </li>
               </ul>
-              <a href="/create?plan=pro" className="block w-full py-3 rounded-xl border border-purple-200 text-purple-700 font-medium text-center hover:bg-purple-50 transition-colors">
+              <Link href="/create?plan=pro" className="block w-full py-3 rounded-xl border border-purple-200 text-purple-700 font-medium text-center hover:bg-purple-50 transition-colors">
                 Começar por R$29
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -353,9 +354,9 @@ export default function LandingPage() {
           <p className="text-lg text-slate-600 mb-8">
             Gere seu primeiro contrato profissional em minutos.
           </p>
-          <a href="/templates" className="inline-block px-10 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
+          <Link href="/templates" className="inline-block px-10 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
             Ver Templates
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -369,9 +370,9 @@ export default function LandingPage() {
             <span className="text-sm text-slate-600">Contrato Express — Alternative Down</span>
           </div>
           <div className="flex items-center gap-6 text-sm text-slate-500">
-            <a href="/termos" className="hover:text-purple-600 transition-colors">Termos</a>
-            <a href="/privacidade" className="hover:text-purple-600 transition-colors">Privacidade</a>
-            <a href="/contato" className="hover:text-purple-600 transition-colors">Contato</a>
+            <Link href="/termos" className="hover:text-purple-600 transition-colors">Termos</Link>
+            <Link href="/privacidade" className="hover:text-purple-600 transition-colors">Privacidade</Link>
+            <Link href="/contato" className="hover:text-purple-600 transition-colors">Contato</Link>
           </div>
         </div>
       </footer>
