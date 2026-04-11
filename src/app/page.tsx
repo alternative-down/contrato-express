@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { GraduationCap, Shield, CreditCard, FileText, Check, HelpCircle, Users, CreditCardIcon, Undo, Headphones, ShieldCheck, Lock } from "lucide-react"
 import Link from "next/link"
 
@@ -61,7 +62,7 @@ export default function LandingPage() {
               <div className="w-7 h-7 rounded-full bg-gradient-to-br from-pink-400 to-orange-400 border-2 border-white flex items-center justify-center text-white text-xs">🧑</div>
             </div>
             <span className="text-sm text-slate-700">
-              <strong className="text-purple-700">+2.847</strong> contratos gerados por freelancers e autônomos brasileiros
+              Contratos gerados por freelancers e autônomos brasileiros
             </span>
           </div>
 
@@ -407,9 +408,9 @@ export default function LandingPage() {
             <span className="text-sm text-slate-600">Contrato Express — Alternative Down</span>
           </div>
           <div className="flex items-center gap-6 text-sm text-slate-500">
-            <a href="/termos" className="hover:text-purple-600 transition-colors">Termos</a>
-            <a href="/privacidade" className="hover:text-purple-600 transition-colors">Privacidade</a>
-            <a href="/contato" className="hover:text-purple-600 transition-colors">Contato</a>
+            <Link href="/termos" className="hover:text-purple-600 transition-colors">Termos</Link>
+            <Link href="/privacidade" className="hover:text-purple-600 transition-colors">Privacidade</Link>
+            <Link href="/contato" className="hover:text-purple-600 transition-colors">Contato</Link>
           </div>
         </div>
       </footer>

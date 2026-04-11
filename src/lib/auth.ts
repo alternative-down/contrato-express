@@ -36,7 +36,7 @@ export async function getUserByEmail(email: string) {
   return result[0] || null;
 }
 
-export async function createUser(email: string, password: string, name?: string) {
+export async function createUser(email: string, password: string, name?: string, asaasCustomerId?: string) {
   const hashed = await hashPassword(password);
   const id = crypto.randomUUID();
   const now = new Date();
@@ -49,8 +49,10 @@ export async function createUser(email: string, password: string, name?: string)
     plan: 'free',
     copyCount: 0,
     copyLimit: 10,
+    // FIX #14.3: Store per-user Asaas customer ID
+    asaasCustomerId: asaasCustomerId || null,
     createdAt: now,
   });
   
-  return { id, email, name, plan: 'free' };
+  return { id, email, name, plan: 'free', asaasCustomerId: asaasCustomerId || null };
 }

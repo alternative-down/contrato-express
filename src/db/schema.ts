@@ -8,6 +8,8 @@ export const users = sqliteTable('users', {
   plan: text('plan').default('free'),
   copyCount: integer('copy_count').default(0),
   copyLimit: integer('copy_limit').default(10),
+  // Asaas customer ID — created on signup, used for all payments
+  asaasCustomerId: text('asaas_customer_id'),
   createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
 });
 
