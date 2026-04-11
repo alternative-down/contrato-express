@@ -222,9 +222,46 @@ export default function LandingPage() {
           <h2 className="text-2xl font-bold text-center text-slate-900 mb-4">
             Planos simples, sem surpresa
           </h2>
-          <p className="text-center text-slate-600 mb-12">
+          <p className="text-center text-slate-600 mb-8">
             Escolha quando precisar. Sem mensalidade.
           </p>
+
+          {/* ─── Pack 5 Upsell Banner ─── */}
+          <div className="mb-8 relative bg-gradient-to-r from-purple-50 via-white to-pink-50 border border-purple-200 rounded-2xl p-5 md:px-6 md:py-5 overflow-hidden">
+            <div className="absolute right-0 top-0 w-40 h-40 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full -translate-y-1/2 translate-x-1/4 opacity-50" />
+            <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="bg-purple-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">⭐ Pack 5</span>
+                  <span className="bg-yellow-100 text-yellow-700 text-xs font-semibold px-2 py-0.5 rounded-full">17% OFF</span>
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-0.5">
+                  5 contratos por <span className="text-purple-600">R$ 79</span> — R$ 15,80 cada
+                </h3>
+                <p className="text-slate-600 text-sm">
+                  Todos os templates. Sem prazo. Ideal para freelancers ativos.
+                </p>
+              </div>
+              <div className="flex-shrink-0 flex flex-col sm:flex-row gap-2">
+                <a
+                  href="/checkout/pack5"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-6 py-3 rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all text-sm whitespace-nowrap"
+                >
+                  Comprar Pack 5
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+                <a
+                  href="/pricing"
+                  className="inline-flex items-center justify-center text-purple-600 font-medium px-4 py-3 rounded-xl hover:bg-purple-50 transition-colors text-sm whitespace-nowrap"
+                >
+                  Ver detalhes →
+                </a>
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-6">
             {/* Free */}
             <div className="p-6 rounded-2xl border border-slate-200 bg-white">

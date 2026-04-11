@@ -38,6 +38,90 @@ export default function PricingPage() {
           <p className="text-lg text-slate-600">Sem mensalidade. Pague apenas pelo contrato que precisa.</p>
         </div>
 
+        {/* ─── Pack 5 — Full-width Hero Card ─── */}
+        <div className="mb-10">
+          <div className="relative bg-gradient-to-br from-purple-600 via-purple-700 to-pink-600 rounded-3xl p-8 md:p-10 shadow-xl shadow-purple-900/20 overflow-hidden">
+            {/* Background decoration */}
+            <div className="absolute inset-0 opacity-10">
+              <svg className="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+                <circle cx="350" cy="-20" r="120" fill="white" />
+                <circle cx="50" cy="180" r="80" fill="white" />
+              </svg>
+            </div>
+
+            <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              {/* Left: info */}
+              <div className="flex-1">
+                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
+                  <span className="text-white text-sm font-semibold">⭐ MELHOR CUSTO-BENEFÍCIO</span>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-1">
+                  Pack 5 Contratos
+                </h2>
+                <p className="text-purple-100 text-base mb-4">
+                  <span className="text-3xl font-bold text-white">R$ 79</span>
+                  {' '}por 5 contratos —{' '}
+                  <span className="font-semibold text-yellow-300">R$ 15,80 cada</span>
+                </p>
+                <ul className="space-y-1.5 mb-0">
+                  {[
+                    'Todos os templates (Basic + Pro)',
+                    'Créditos cumulativos — use quando quiser',
+                    'Sem prazo de validade',
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm text-purple-100">
+                      <svg className="w-4 h-4 text-green-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Right: pricing + CTA */}
+              <div className="flex-shrink-0 flex flex-col items-start md:items-end gap-3">
+                <div className="bg-white/15 backdrop-blur-sm rounded-xl px-5 py-3 text-center">
+                  <div className="text-white/80 text-xs font-medium mb-0.5">Economia vs Basic</div>
+                  <div className="text-yellow-300 font-bold text-2xl">17% OFF</div>
+                </div>
+                <a
+                  href="/checkout/pack5"
+                  className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-white text-purple-700 font-bold px-8 py-4 rounded-xl hover:bg-purple-50 hover:scale-[1.02] transition-all shadow-lg text-base"
+                >
+                  Comprar Pack 5 — R$ 79
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+                <p className="text-purple-200 text-xs">💳 Cartão, PIX ou Boleto · 7 dias de garantia</p>
+              </div>
+            </div>
+
+            {/* Bottom trust line */}
+            <div className="mt-5 pt-5 border-t border-white/20 flex flex-wrap gap-x-6 gap-y-1">
+              <span className="text-purple-100 text-xs flex items-center gap-1.5">
+                <svg className="w-3.5 h-3.5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Os 5 contratos nunca expiram
+              </span>
+              <span className="text-purple-100 text-xs flex items-center gap-1.5">
+                <svg className="w-3.5 h-3.5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Todos os templates incluídos
+              </span>
+              <span className="text-purple-100 text-xs flex items-center gap-1.5">
+                <svg className="w-3.5 h-3.5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Máximo 12 meses sem uso
+              </span>
+            </div>
+          </div>
+        </div>
+
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {/* Trial */}
           <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
