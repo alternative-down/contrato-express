@@ -4,6 +4,31 @@ import { useEffect, useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
+const CHECKOUT_STORAGE_KEY = 'contrato-express:checkout-session';
+
+type PaymentMethod = 'pix' | 'boleto' | 'credit_card';
+
+type CheckoutSession = {
+  paymentId: string;
+  paymentMethod: PaymentMethod;
+  invoiceUrl?: string | null;
+  pix?: {
+    encodedImage?: string | null;
+    payload?: string | null;
+    expirationDate?: string | null;
+  } | null;
+  boleto?: {
+    bankSlipUrl?: string | null;
+    invoiceUrl?: string | null;
+    identificationField?: string | null;
+    nossoNumero?: string | null;
+    barCode?: string | null;
+  } | null;
+  creditCard?: {
+    invoiceUrl?: string | null;
+  } | null;
+};
+
 interface PageProps {
   params: { templateId: string };
 }
@@ -22,8 +47,24 @@ function CheckoutContent({ templateId }: { templateId: string }) {
   const searchParams = useSearchParams();
   const paymentId = searchParams.get('paymentId') || '';
   const contractId = searchParams.get('contractId') || '';
+  const paymentMethod = (searchParams.get('paymentMethod') as PaymentMethod | null) || 'pix';
   const [contract, setContract] = useState<Contract | null>(null);
   const [checking, setChecking] = useState(true);
+  const [checkoutSession, setCheckoutSession] = useState<CheckoutSession | null>(null);
+
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem(CHECKOUT_STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored) as CheckoutSession;
+        if (parsed.paymentId === paymentId) {
+          setCheckoutSession(parsed);
+        }
+      }
+    } catch {
+      // ignore storage errors
+    }
+  }, [paymentId]);
 
   useEffect(() => {
     if (!contractId) {
@@ -62,6 +103,10 @@ function CheckoutContent({ templateId }: { templateId: string }) {
     catch { /* ignore */ }
   }
 
+  const pixData = checkoutSession?.pix;
+  const boletoData = checkoutSession?.boleto;
+  const cardInvoiceUrl = checkoutSession?.creditCard?.invoiceUrl || checkoutSession?.invoiceUrl;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 flex items-center justify-center px-4">
       <div className="max-w-lg w-full text-center">
@@ -89,10 +134,77 @@ function CheckoutContent({ templateId }: { templateId: string }) {
           <p className="text-slate-600 mb-6">
             Seu pagamento foi confirmado e o contrato foi gerado com sucesso!
           </p>
+        ) : paymentMethod === 'boleto' ? (
+          <p className="text-slate-600 mb-6">
+            Seu boleto foi gerado. Use os dados abaixo para pagar e liberar o contrato.
+          </p>
+        ) : paymentMethod === 'credit_card' ? (
+          <p className="text-slate-600 mb-6">
+            Seu link de pagamento por cartão foi gerado. Abra a fatura do Asaas para concluir a cobrança.
+          </p>
         ) : (
           <p className="text-slate-600 mb-6">
             O QR Code PIX foi gerado. Complete o pagamento no app do seu banco para receber o contrato.
           </p>
+        )}
+
+        {!isReady && paymentMethod === 'pix' && pixData && (
+          <div className="bg-white rounded-xl border border-purple-100 p-4 mb-6 text-left">
+            <p className="text-sm font-medium text-slate-900 mb-3">Pague com PIX</p>
+            {pixData.encodedImage && (
+              <img
+                src={`data:image/png;base64,${pixData.encodedImage}`}
+                alt="QR Code PIX"
+                className="w-56 h-56 mx-auto mb-4 rounded-lg border border-slate-200"
+              />
+            )}
+            <div className="bg-slate-50 rounded-lg p-3 border border-slate-200">
+              <p className="text-xs font-medium text-slate-700 mb-1">Código PIX copia e cola</p>
+              <p className="text-xs text-slate-600 break-all">{pixData.payload || 'Payload PIX indisponível'}</p>
+            </div>
+          </div>
+        )}
+
+        {!isReady && paymentMethod === 'boleto' && boletoData && (
+          <div className="bg-white rounded-xl border border-purple-100 p-4 mb-6 text-left space-y-3">
+            <p className="text-sm font-medium text-slate-900">Boleto gerado</p>
+            <p className="text-xs text-slate-600 break-all">
+              <strong>Linha digitável:</strong> {boletoData.identificationField || boletoData.barCode || 'Indisponível'}
+            </p>
+            {(boletoData.bankSlipUrl || boletoData.invoiceUrl) && (
+              <a
+                href={boletoData.bankSlipUrl || boletoData.invoiceUrl || '#'}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center w-full py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold rounded-xl hover:opacity-90 transition"
+              >
+                Abrir boleto
+              </a>
+            )}
+          </div>
+        )}
+
+        {!isReady && paymentMethod === 'credit_card' && (
+          <div className="bg-white rounded-xl border border-purple-100 p-4 mb-6 text-left space-y-3">
+            <p className="text-sm font-medium text-slate-900">Pagamento por cartão</p>
+            <p className="text-xs text-slate-600">
+              O pagamento é concluído na fatura hospedada pelo Asaas.
+            </p>
+            {cardInvoiceUrl ? (
+              <a
+                href={cardInvoiceUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center w-full py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold rounded-xl hover:opacity-90 transition"
+              >
+                Abrir link de pagamento
+              </a>
+            ) : (
+              <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700">
+                Link da fatura indisponível. Gere o checkout novamente.
+              </div>
+            )}
+          </div>
         )}
 
         {/* Contract preview when ready */}
