@@ -58,7 +58,8 @@ export default function TemplateDetailPage({ params }: PageProps) {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/api/checkout', {
+      // FIX #14.1: First create the contract, then start checkout
+      const contractRes = await fetch('/api/contracts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -69,15 +70,38 @@ export default function TemplateDetailPage({ params }: PageProps) {
         }),
         credentials: 'include',
       });
+
+      if (!contractRes.ok) {
+        const err = await contractRes.json();
+        setError(err.error || 'Erro ao criar contrato');
+        setLoading(false);
+        return;
+      }
+
+      const { contractId } = await contractRes.json();
+
+      // Now start PIX payment with the contract ID
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contractId,
+          amount: template.price,
+          planType: template.planType,
+        }),
+        credentials: 'include',
+      });
+
       if (res.ok) {
         const data = await res.json();
         if (data.encodedImage) {
-          router.push(`/checkout/${template.id}?paymentId=${data.paymentId}`);
+          router.push(`/checkout/${template.id}?paymentId=${data.paymentId}&contractId=${contractId}`);
         } else {
           setError('QR Code não disponível em modo sandbox');
         }
       } else {
-        setError('Erro ao iniciar checkout');
+        const err = await res.json();
+        setError(err.error || 'Erro ao iniciar checkout');
       }
     } catch {
       setError('Erro de conexão');

@@ -1,22 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { db } from '@/db';
 import { orders, users } from '@/db/schema';
 import { eq } from 'drizzle-orm';
+import { verifyToken } from '@/lib/auth';
 
 const ASAAS_API_KEY = process.env.ASAAS_API_KEY || '';
-// FIX #14.2: Use production endpoint, not sandbox
 const ASAAS_ENDPOINT = 'https://api.asaas.com/api/v3';
 
 export async function POST(request: NextRequest) {
   try {
-    const { contractId, userId, amount, planType } = await request.json();
+    // FIX #14.1: Get userId from auth cookie, not request body
+    const token = (await cookies()).get('token')?.value;
+    if (!token) {
+      return NextResponse.json({ error: 'Não autenticado' }, { status: 401 });
+    }
 
-    if (!contractId || !userId || !amount) {
+    const payload = await verifyToken(token);
+    if (!payload) {
+      return NextResponse.json({ error: 'Token inválido' }, { status: 401 });
+    }
+
+    const { contractId, amount, planType } = await request.json();
+
+    if (!contractId || !amount) {
       return NextResponse.json({ error: 'Dados incompletos' }, { status: 400 });
     }
 
-    // FIX #14.3: Get per-user Asaas customer ID instead of fixed env var
-    const userResult = await db.select().from(users).where(eq(users.id, userId)).limit(1);
+    // Get user from DB
+    const userResult = await db.select().from(users).where(eq(users.id, payload.userId)).limit(1);
     const user = userResult[0];
 
     if (!user) {
@@ -31,6 +43,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create PIX payment on Asaas using per-user customer ID
+    // FIX #14.1: externalReference = contractId so webhook can find the contract
     const asaasResponse = await fetch(`${ASAAS_ENDPOINT}/payments`, {
       method: 'POST',
       headers: {
@@ -55,11 +68,11 @@ export async function POST(request: NextRequest) {
 
     const asaasData = await asaasResponse.json();
 
-    // Save order to DB
+    // Save order to DB with contractId
     const orderId = crypto.randomUUID();
     await db.insert(orders).values({
       id: orderId,
-      userId,
+      userId: payload.userId,
       contractId,
       amount,
       status: 'pending',
@@ -86,6 +99,7 @@ export async function POST(request: NextRequest) {
       qrCodeUrl,
       encodedImage,
       amount,
+      contractId,
     });
   } catch (error) {
     console.error('Checkout error:', error);

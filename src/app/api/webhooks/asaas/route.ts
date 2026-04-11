@@ -3,7 +3,6 @@ import { db } from '@/db';
 import { orders, contracts } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
-const ASAAS_API_KEY = process.env.ASAAS_API_KEY || '';
 const ASAAS_WEBHOOK_TOKEN = process.env.ASAAS_WEBHOOK_TOKEN || '';
 
 type AsaasEvent = {
@@ -22,7 +21,7 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {
-    // Validate webhook token
+    // FIX #14.4: Validate webhook token
     if (ASAAS_WEBHOOK_TOKEN) {
       const token = request.headers.get('asaas-signature');
       if (token !== ASAAS_WEBHOOK_TOKEN) {
@@ -56,10 +55,9 @@ async function handlePaymentConfirmed(event: AsaasEvent) {
   const paymentId = event.payment.id;
   const externalReference = event.payment.externalReference;
 
-  // Find the order by Asaas payment ID or external reference (contractId)
+  // Find the order by contractId (externalReference) or payment ID
   let order;
   if (externalReference) {
-    // Find by contractId (externalReference = contractId)
     const result = await db
       .select()
       .from(orders)
@@ -69,7 +67,6 @@ async function handlePaymentConfirmed(event: AsaasEvent) {
   }
 
   if (!order && paymentId) {
-    // Fallback: find by asaasPaymentId
     const result = await db
       .select()
       .from(orders)
@@ -86,26 +83,22 @@ async function handlePaymentConfirmed(event: AsaasEvent) {
   // Update order status to paid
   await db
     .update(orders)
-    .set({
-      status: 'paid',
-      paidAt: new Date(),
-    })
+    .set({ status: 'paid' })
     .where(eq(orders.id, order.id));
 
-  // Update contract status to paid
+  // FIX #14.4: Mark contract as completed (was 'paid' before, now 'completed')
   await db
     .update(contracts)
     .set({
-      status: 'paid',
+      status: 'completed',
       updatedAt: new Date(),
     })
     .where(eq(contracts.id, order.contractId));
 
-  console.log(`[Asaas Webhook] Order ${order.id} marked as paid. Contract ${order.contractId} delivered.`);
+  console.log(`[Asaas Webhook] Order ${order.id} marked as paid. Contract ${order.contractId} marked as completed.`);
 }
 
 async function handlePaymentOverdue(event: AsaasEvent) {
   const paymentId = event.payment.id;
   console.log(`[Asaas Webhook] Payment overdue: ${paymentId}`);
-  // Could send notification email here in the future
 }
