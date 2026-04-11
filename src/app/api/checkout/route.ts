@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
-import { orders } from '@/db/schema';
+import { orders, users } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
 const ASAAS_API_KEY = process.env.ASAAS_API_KEY || '';
-const ASAAS_ENDPOINT = 'https://sandbox.asaas.com/api/v3';
+// FIX #14.2: Use production endpoint, not sandbox
+const ASAAS_ENDPOINT = 'https://api.asaas.com/api/v3';
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,7 +15,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Dados incompletos' }, { status: 400 });
     }
 
-    // Create PIX payment on Asaas
+    // FIX #14.3: Get per-user Asaas customer ID instead of fixed env var
+    const userResult = await db.select().from(users).where(eq(users.id, userId)).limit(1);
+    const user = userResult[0];
+
+    if (!user) {
+      return NextResponse.json({ error: 'Usuário não encontrado' }, { status: 404 });
+    }
+
+    if (!user.asaasCustomerId) {
+      return NextResponse.json(
+        { error: 'Conta Asaas não configurada. Cadastro incompleto.' },
+        { status: 400 }
+      );
+    }
+
+    // Create PIX payment on Asaas using per-user customer ID
     const asaasResponse = await fetch(`${ASAAS_ENDPOINT}/payments`, {
       method: 'POST',
       headers: {
@@ -23,7 +39,7 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({
         billingType: 'PIX',
-        customer: process.env.ASAAS_CUSTOMER_ID || '',
+        customer: user.asaasCustomerId,
         value: amount,
         dueDate: new Date().toISOString().split('T')[0],
         description: `Contrato Express - ${planType === 'pro' ? 'Plano Pro' : 'Plano Basic'}`,
