@@ -3,7 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { TEMPLATES, getTemplateById } from '@/lib/templates';
+import { getTemplateById } from '@/lib/templates';
+
+const CHECKOUT_STORAGE_KEY = 'contrato-express:checkout-session';
+
+type PaymentMethod = 'pix' | 'boleto' | 'credit_card';
 
 interface PageProps {
   params: { templateId: string };
@@ -16,6 +20,7 @@ export default function TemplateDetailPage({ params }: PageProps) {
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState('');
   const [error, setError] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('pix');
 
   if (!template) {
     return (
@@ -88,17 +93,27 @@ export default function TemplateDetailPage({ params }: PageProps) {
           contractId,
           amount: template.price,
           planType: template.planType,
+          paymentMethod,
         }),
         credentials: 'include',
       });
 
       if (res.ok) {
         const data = await res.json();
-        if (data.encodedImage) {
-          router.push(`/checkout/${template.id}?paymentId=${data.paymentId}&contractId=${contractId}`);
-        } else {
-          setError('QR Code não disponível em modo sandbox');
-        }
+        sessionStorage.setItem(
+          CHECKOUT_STORAGE_KEY,
+          JSON.stringify({
+            paymentId: data.paymentId,
+            paymentMethod: data.paymentMethod,
+            pix: data.pix || null,
+            boleto: data.boleto || null,
+            creditCard: data.creditCard || null,
+            invoiceUrl: data.invoiceUrl || null,
+          })
+        );
+        router.push(
+          `/checkout/${template.id}?paymentId=${data.paymentId}&contractId=${contractId}&paymentMethod=${data.paymentMethod}`
+        );
       } else {
         const err = await res.json();
         setError(err.error || 'Erro ao iniciar checkout');
@@ -184,6 +199,27 @@ export default function TemplateDetailPage({ params }: PageProps) {
                   {error}
                 </div>
               )}
+
+              <div className="pt-2">
+                <p className="text-sm font-medium text-slate-700 mb-3">Forma de pagamento</p>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {[
+                    { value: 'pix', label: 'PIX', hint: 'Confirmação rápida' },
+                    { value: 'boleto', label: 'Boleto', hint: 'Pagamento bancário' },
+                    { value: 'credit_card', label: 'Cartão', hint: 'Pagamento por link Asaas' },
+                  ].map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => setPaymentMethod(option.value as PaymentMethod)}
+                      className={`rounded-xl border px-4 py-3 text-left transition ${paymentMethod === option.value ? 'border-purple-500 bg-purple-50' : 'border-purple-200 bg-white hover:border-purple-300'}`}
+                    >
+                      <p className="font-semibold text-slate-900">{option.label}</p>
+                      <p className="text-xs text-slate-500 mt-1">{option.hint}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
 
               <div className="flex gap-3 pt-2">
                 <button
