@@ -42,10 +42,21 @@ export default function CheckoutPack5Page() {
       const res = await fetch('/api/checkout/pack5', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: user?.id }),
       });
       const data = await res.json();
-      if (data.paymentUrl) {
+
+      if (!res.ok || data.error) {
+        alert(data.error || 'Erro ao processar. Tente novamente.');
+        btn.disabled = false;
+        btn.textContent = 'Finalizar Compra — R$ 79';
+        return;
+      }
+
+      try { sessionStorage.setItem('contrato-express:pack5-session', JSON.stringify(data)); } catch { /* ignore */ }
+
+      if (data.pix) {
+        window.location.href = `/checkout/pack5/success?paymentId=${data.paymentId}&orderId=${data.orderId}`;
+      } else if (data.paymentUrl) {
         window.location.href = data.paymentUrl;
       } else {
         alert('Erro ao processar. Tente novamente.');

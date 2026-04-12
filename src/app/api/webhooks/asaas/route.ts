@@ -87,15 +87,19 @@ async function handlePaymentConfirmed(event: AsaasEvent) {
     .where(eq(orders.id, order.id));
 
   // FIX #14.4: Mark contract as completed (was 'paid' before, now 'completed')
-  await db
-    .update(contracts)
-    .set({
-      status: 'completed',
-      updatedAt: new Date(),
-    })
-    .where(eq(contracts.id, order.contractId));
-
-  console.log(`[Asaas Webhook] Order ${order.id} marked as paid. Contract ${order.contractId} marked as completed.`);
+  // FIX #30: Mark contract as completed. Skip for pack5/prepaid orders (contractId null).
+  if (order.contractId) {
+    await db
+      .update(contracts)
+      .set({
+        status: 'completed',
+        updatedAt: new Date(),
+      })
+      .where(eq(contracts.id, order.contractId));
+    console.log(`[Asaas Webhook] Order ${order.id} marked as paid. Contract ${order.contractId} marked as completed.`);
+  } else {
+    console.log(`[Asaas Webhook] Order ${order.id} marked as paid. Pack5/prepaid — no contract to update.`);
+  }
 }
 
 async function handlePaymentOverdue(event: AsaasEvent) {
