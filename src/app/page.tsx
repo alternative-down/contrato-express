@@ -17,6 +17,7 @@ export default function LandingPage() {
             <a href="#templates" className="text-slate-600 hover:text-purple-600 transition-colors">Templates</a>
             <a href="#pricing" className="text-slate-600 hover:text-purple-600 transition-colors">Preços</a>
             <a href="#faq" className="text-slate-600 hover:text-purple-600 transition-colors">FAQ</a>
+            <Link href="/support" className="text-slate-600 hover:text-purple-600 transition-colors">Suporte</Link>
             <Link href="/create" className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium hover:shadow-lg transition-shadow">
               Começar
             </Link>
@@ -379,6 +380,10 @@ export default function LandingPage() {
               <p className="mt-4 text-slate-600">Nosso modelo é pay-per-use. Você paga apenas pelo contrato que precisa, sem mensalidade ou compromisso. Sem cancelamento necessário.</p>
             </details>
           </div>
+          <p className="mt-6 text-center text-sm text-slate-500">
+            Não encontrou o que procurava?{' '}
+            <Link href="/support" className="text-purple-600 hover:underline">Fale com o suporte</Link>
+          </p>
         </div>
       </section>
 
@@ -407,6 +412,7 @@ export default function LandingPage() {
             <span className="text-sm text-slate-600">Contrato Express — Alternative Down</span>
           </div>
           <div className="flex items-center gap-6 text-sm text-slate-500">
+            <Link href="/suporte" className="hover:text-purple-600 transition-colors">Suporte</Link>
             <Link href="/termos" className="hover:text-purple-600 transition-colors">Termos</Link>
             <Link href="/privacidade" className="hover:text-purple-600 transition-colors">Privacidade</Link>
             <Link href="/contato" className="hover:text-purple-600 transition-colors">Contato</Link>
