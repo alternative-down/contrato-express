@@ -80,10 +80,10 @@ async function handlePaymentConfirmed(event: AsaasEvent) {
     return;
   }
 
-  // Update order status to paid
+  // Update order status to paid and record paidAt timestamp
   await db
     .update(orders)
-    .set({ status: 'paid' })
+    .set({ status: 'paid', paidAt: new Date() })
     .where(eq(orders.id, order.id));
 
   // FIX #14.4: Mark contract as completed (was 'paid' before, now 'completed')
@@ -105,4 +105,37 @@ async function handlePaymentConfirmed(event: AsaasEvent) {
 async function handlePaymentOverdue(event: AsaasEvent) {
   const paymentId = event.payment.id;
   console.log(`[Asaas Webhook] Payment overdue: ${paymentId}`);
+
+  // Find the order by payment ID or externalReference
+  let order;
+  if (event.payment.externalReference) {
+    const result = await db
+      .select()
+      .from(orders)
+      .where(eq(orders.contractId, event.payment.externalReference))
+      .limit(1);
+    order = result[0];
+  }
+  if (!order && paymentId) {
+    const result = await db
+      .select()
+      .from(orders)
+      .where(eq(orders.asaasPaymentId, paymentId))
+      .limit(1);
+    order = result[0];
+  }
+
+  if (!order) {
+    console.log(`[Asaas Webhook] Order not found for overdue payment: ${paymentId}`);
+    return;
+  }
+
+  // Only update if still pending (don't overwrite if already paid)
+  if (order.status === 'pending') {
+    await db
+      .update(orders)
+      .set({ status: 'cancelled' })
+      .where(eq(orders.id, order.id));
+    console.log(`[Asaas Webhook] Order ${order.id} marked as cancelled (overdue).`);
+  }
 }
