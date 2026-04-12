@@ -3,11 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-export const metadata = {
-  title: "Preços - Contrato Express",
-  description: "Contratos profissionais a partir de R$ 79/mês. Acesso ilimitado, sem mensalidade escondida.",
-};
-
 const CheckIcon = ({ color = "text-green-500" }: { color?: string }) => (
   <svg className={`w-4 h-4 ${color} flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
