@@ -1,10 +1,5 @@
 import Link from "next/link";
 
-export const metadata = {
-  title: "Preços - Contrato Express",
-  description: "Sem mensalidade. Pague apenas pelo contrato que precisa. R$19 por contrato.",
-};
-
 const CheckIcon = ({ color = "text-green-500" }: { color?: string }) => (
   <svg className={`w-4 h-4 ${color} flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
