@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 const CheckIcon = ({ color = "text-green-500" }: { color?: string }) => (
   <svg className={`w-4 h-4 ${color} flex-shrink-0`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -22,6 +24,7 @@ export default function PricingPage() {
           </Link>
           <nav className="flex items-center gap-4">
             <Link href="/templates" className="text-slate-600 hover:text-purple-600 text-sm font-medium">Templates</Link>
+            <Link href="/support" className="text-slate-600 hover:text-purple-600 text-sm font-medium">Suporte</Link>
             <Link href="/login" className="text-slate-600 hover:text-purple-600 text-sm font-medium">Entrar</Link>
             <Link href="/signup" className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-4 py-2 rounded-lg hover:opacity-90 text-sm">Cadastrar</Link>
           </nav>

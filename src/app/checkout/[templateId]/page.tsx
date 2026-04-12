@@ -265,7 +265,7 @@ function CheckoutContent({ templateId }: { templateId: string }) {
                 Pack 5 — 5 contratos por <strong className="text-purple-600">R$ 79</strong> (R$ 15,80 cada).
                 Todos os templates. Sem prazo de validade.
               </p>
-              <a
+              <Link
                 href="/checkout/pack5"
                 className="inline-flex items-center gap-1.5 bg-gradient-to-r from-purple-600 to-pink-500 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:shadow-md transition-all"
               >
@@ -273,7 +273,7 @@ function CheckoutContent({ templateId }: { templateId: string }) {
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -23,6 +23,7 @@ export default function TemplatesPage() {
           </Link>
           <nav className="flex items-center gap-4">
             <Link href="/pricing" className="text-slate-600 hover:text-purple-600 text-sm font-medium">Preços</Link>
+            <Link href="/support" className="text-slate-600 hover:text-purple-600 text-sm font-medium">Suporte</Link>
             <Link href="/login" className="text-slate-600 hover:text-purple-600 text-sm font-medium">Entrar</Link>
             <Link href="/signup" className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-4 py-2 rounded-lg hover:opacity-90 text-sm">Cadastrar</Link>
           </nav>
