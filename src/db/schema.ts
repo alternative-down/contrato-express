@@ -30,7 +30,7 @@ export const contracts = sqliteTable('contracts', {
 export const orders = sqliteTable('orders', {
   id: text('id').primaryKey(),
   userId: text('user_id').notNull(),
-  contractId: text('contract_id').notNull(),
+  contractId: text('contract_id'), // nullable for pack5/prepaid orders
   amount: real('amount').notNull(),
   status: text('status').default('pending'), // 'pending' | 'paid' | 'cancelled' | 'refunded'
   asaasPaymentId: text('asaas_payment_id'),
