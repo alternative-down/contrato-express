@@ -38,7 +38,7 @@ export default function PricingPage() {
           <p className="text-lg text-slate-600">Comece grátis. Evolua conforme sua demanda.</p>
         </div>
 
-        {/* ─── Tier 1: Acesso Mensal R$ 79 — Hero Card ─── */}
+        {/* ─── Tier 1: Acesso Mensal R$ 49 — Hero Card ─── */}
         <div className="mb-10">
           <div className="relative bg-gradient-to-br from-purple-600 via-purple-700 to-pink-600 rounded-3xl p-8 md:p-10 shadow-xl shadow-purple-900/20 overflow-hidden">
             <div className="absolute inset-0 opacity-10">
@@ -58,7 +58,7 @@ export default function PricingPage() {
                   Acesso Mensal
                 </h2>
                 <p className="text-purple-100 text-base mb-4">
-                  <span className="text-3xl font-bold text-white">R$ 79</span>
+                  <span className="text-3xl font-bold text-white">R$ 49</span>
                   <span className="text-purple-200"> /mês</span>
                 </p>
                 <ul className="space-y-1.5 mb-0">
@@ -88,7 +88,7 @@ export default function PricingPage() {
                   href="/signup?plan=mensal"
                   className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-white text-purple-700 font-bold px-8 py-4 rounded-xl hover:bg-purple-50 hover:scale-[1.02] transition-all shadow-lg text-base"
                 >
-                  Assinar R$ 79/mês
+                  Assinar R$ 49/mês
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -209,7 +209,7 @@ export default function PricingPage() {
             },
             {
               q: 'Qual a diferença entre contrato avulso e assinatura mensal?',
-              a: 'Contrato avulso: pagamento único por contrato. Assinatura mensal: acesso ilimitado a todos os contratos por R$ 79/mês. Para quem faz mais de 4 contratos por mês, a assinatura sai mais barato.',
+              a: 'Contrato avulso: pagamento único por contrato. Assinatura mensal: acesso ilimitado a todos os contratos por R$ 49/mês. Para quem faz mais de 4 contratos por mês, a assinatura sai mais barato.',
             },
             {
               q: 'Os contratos têm validade?',
