@@ -17,10 +17,33 @@ export default function TemplateDetailPage({ params }: PageProps) {
   const router = useRouter();
   const template = getTemplateById(params.templateId);
   const [formData, setFormData] = useState<Record<string, string>>({});
-  const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('pix');
+
+  const validateForm = () => {
+    if (!template) return {};
+    const errors: Record<string, string> = {};
+    template.fields.forEach(field => {
+      const value = formData[field.name] || '';
+      if (field.required && !value.trim()) {
+        errors[field.name] = 'Campo obrigatório';
+      } else if (value.trim()) {
+        if (field.type === 'cpf' && !/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(value)) {
+          errors[field.name] = 'CPF inválido (formato: 000.000.000-00)';
+        }
+        if (field.type === 'cnpj' && !/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/.test(value)) {
+          errors[field.name] = 'CNPJ inválido (formato: 00.000.000/0000-00)';
+        }
+        if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          errors[field.name] = 'Email inválido';
+        }
+      }
+    });
+    return errors;
+  };
 
   if (!template) {
     return (
@@ -75,6 +98,13 @@ export default function TemplateDetailPage({ params }: PageProps) {
   };
 
   const handleCheckout = async () => {
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setFieldErrors(validationErrors);
+      setError('Corrija os campos destacados antes de continuar.');
+      return;
+    }
+    setFieldErrors({});
     setLoading(true);
     setError('');
     try {
@@ -194,18 +224,21 @@ export default function TemplateDetailPage({ params }: PageProps) {
                   {field.type === 'textarea' ? (
                     <textarea
                       value={formData[field.name] || ''}
-                      onChange={(e) => handleFieldChange(field.name, e.target.value)}
+                      onChange={(e) => { handleFieldChange(field.name, e.target.value); setFieldErrors(prev => ({ ...prev, [field.name]: '' })); }}
                       rows={3}
-                      className="w-full px-4 py-3 bg-white border border-purple-200 rounded-xl focus:outline-none focus:border-purple-500 resize-none"
+                      className={`w-full px-4 py-3 bg-white border rounded-xl focus:outline-none focus:border-purple-500 resize-none ${fieldErrors[field.name] ? 'border-red-400 bg-red-50' : 'border-purple-200'}`}
                     />
                   ) : (
                     <input
                       type={field.type === 'date' ? 'date' : field.type === 'number' ? 'number' : 'text'}
                       value={formData[field.name] || ''}
-                      onChange={(e) => handleFieldChange(field.name, e.target.value)}
+                      onChange={(e) => { handleFieldChange(field.name, e.target.value); setFieldErrors(prev => ({ ...prev, [field.name]: '' })); }}
                       placeholder={field.label}
-                      className="w-full px-4 py-3 bg-white border border-purple-200 rounded-xl focus:outline-none focus:border-purple-500"
+                      className={`w-full px-4 py-3 bg-white border rounded-xl focus:outline-none focus:border-purple-500 ${fieldErrors[field.name] ? 'border-red-400 bg-red-50' : 'border-purple-200'}`}
                     />
+                  )}
+                  {fieldErrors[field.name] && (
+                    <p className="mt-1 text-xs text-red-500">{fieldErrors[field.name]}</p>
                   )}
                 </div>
               ))}
