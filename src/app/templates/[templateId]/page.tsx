@@ -155,6 +155,7 @@ export default function TemplateDetailPage({ params }: PageProps) {
           <nav className="flex items-center gap-4">
             <Link href="/templates" className="text-slate-600 hover:text-purple-600 text-sm font-medium">Templates</Link>
             <Link href="/pricing" className="text-slate-600 hover:text-purple-600 text-sm font-medium">Preços</Link>
+            <Link href="/support" className="text-slate-600 hover:text-purple-600 text-sm font-medium">Suporte</Link>
           </nav>
         </div>
       </header>
