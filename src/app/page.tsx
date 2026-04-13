@@ -289,7 +289,7 @@ export default function LandingPage() {
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-purple-500 text-white text-xs font-medium">
                 Mais Escolhido
               </span>
-              <h3 className="text-lg font-medium text-slate-600 mb-2">Individual</h3>
+              <h3 className="text-lg font-medium text-slate-600 mb-2">Avulso</h3>
               <div className="mb-4">
                 <span className="text-4xl font-bold text-slate-900">R$19</span>
                 <span className="text-slate-500">/contrato</span>
@@ -306,18 +306,18 @@ export default function LandingPage() {
                   <Check className="w-4 h-4 text-green-500" /> Download em PDF
                 </li>
               </ul>
-              <Link href="/create?plan=individual" className="block w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-center hover:shadow-lg transition-shadow">
+              <Link href="/create?plan=avulso" className="block w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-center hover:shadow-lg transition-shadow">
                 Começar por R$19/contrato
               </Link>
             </div>
-            {/* Pro */}
+            {/* Mensal */}
             <div className="p-6 rounded-2xl border border-slate-200 bg-white">
-              <h3 className="text-lg font-medium text-slate-600 mb-2">Pro</h3>
+              <h3 className="text-lg font-medium text-slate-600 mb-2">Mensal</h3>
               <div className="mb-4">
-                <span className="text-4xl font-bold text-slate-900">R$29</span>
-                <span className="text-slate-500">/contrato</span>
+                <span className="text-4xl font-bold text-slate-900">R$49</span>
+                <span className="text-slate-500">/mês</span>
               </div>
-              <p className="text-slate-600 text-sm mb-2">Pagamento por uso. Sem mensalidade.</p>
+              <p className="text-slate-600 text-sm mb-2">Contratos ilimitados. Acesso total.</p>
               <p className="text-slate-500 text-xs mb-4">Swap de templates + reuso + histórico.</p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2 text-sm text-slate-600">
@@ -336,8 +336,8 @@ export default function LandingPage() {
                   <Check className="w-4 h-4 text-green-500" /> Prioridade no suporte
                 </li>
               </ul>
-              <Link href="/create?plan=pro" className="block w-full py-3 rounded-xl border border-purple-200 text-purple-700 font-medium text-center hover:bg-purple-50 transition-colors">
-                Começar por R$29
+              <Link href="/create?plan=mensal" className="block w-full py-3 rounded-xl border border-purple-200 text-purple-700 font-medium text-center hover:bg-purple-50 transition-colors">
+                Começar por R$49/mês
               </Link>
             </div>
           </div>
@@ -356,14 +356,14 @@ export default function LandingPage() {
                 <span className="font-medium text-slate-900">O contrato é válido juridicamente?</span>
                 <HelpCircle className="w-5 h-5 text-purple-600 group-open:rotate-180 transition-transform" />
               </summary>
-              <p className="mt-4 text-slate-600">Sim. Nossos contratos são desenvolvidos com base na legislação brasileira vigente (Lei 9.307/96, Código Civil). São documentos legally válidos quando properly preenchidos e assinados por ambas as partes.</p>
+              <p className="mt-4 text-slate-600">Sim. Nossos contratos são desenvolvidos com base na legislação brasileira vigente (Lei 9.307/96, Código Civil). São documentos juridicamente válidos quando corretamente preenchidos e assinados por ambas as partes.</p>
             </details>
             <details className="group p-6 rounded-2xl border border-purple-100">
               <summary className="flex items-center justify-between cursor-pointer list-none">
                 <span className="font-medium text-slate-900">Posso editar o contrato depois?</span>
                 <HelpCircle className="w-5 h-5 text-purple-600 group-open:rotate-180 transition-transform" />
               </summary>
-              <p className="mt-4 text-slate-600">No plano Basic você recebe 1 versão final. No plano Pro, você pode fazer revisões ilimitadas até ficar satisfeito com o resultado.</p>
+              <p className="mt-4 text-slate-600">No plano Avulso você recebe 1 versão final. No plano Mensal, você pode fazer revisões ilimitadas até ficar satisfeito com o resultado.</p>
             </details>
             <details className="group p-6 rounded-2xl border border-purple-100">
               <summary className="flex items-center justify-between cursor-pointer list-none">
