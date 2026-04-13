@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/db';
 import { contracts } from '@/db/schema';
-import { sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    const result = await db.execute(
-      sql`SELECT COUNT(*) as count FROM contracts WHERE status = 'paid'`
-    );
-    const count = Number((result.rows[0] as { count: number })?.count ?? 0);
+    const result = await db
+      .select({ count: contracts.id })
+      .from(contracts)
+      .where(eq(contracts.status, 'paid'));
+    const count = result.length;
     return NextResponse.json(
       { count: count === 0 ? 500 : count },
       { headers: { 'Cache-Control': 'no-store' } }
