@@ -226,7 +226,7 @@ export function getTemplateById(id: string) {
 export function renderTemplate(template: typeof TEMPLATES[0], formData: Record<string, string>) {
   let content = template.content;
   for (const [key, value] of Object.entries(formData)) {
-    const placeholder = `[${key.toUpperCase()}]`;
+    const placeholder = '\\[' + key.toUpperCase() + '\\]';
     content = content.replace(new RegExp(placeholder, 'g'), value || '[não informado]');
   }
   return content;
