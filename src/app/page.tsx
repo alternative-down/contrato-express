@@ -39,7 +39,7 @@ export default function LandingPage() {
             Gere contratos personalizados em PDF para seus projetos.
           </p>
           <p className="text-lg text-slate-600 mb-10">
-            Gere contratos profissionais em PDF, sem advogado. Comece com <strong className="text-purple-600">3 gratuitos</strong>. Depois, <strong className="text-purple-600">R$19/contrato</strong>.
+            Gere contratos profissionais em PDF, sem advogado. Comece com <strong className="text-purple-600">3 gratuitos</strong>. Depois, <strong className="text-purple-600">R$29/contrato</strong>.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/create?plan=free" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all">
@@ -105,7 +105,7 @@ export default function LandingPage() {
                 <CreditCard className="w-6 h-6 text-pink-600" />
               </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Custo Acessível</h3>
-              <p className="text-slate-600">Advogados cobram R$500 a R$2.000+ por contrato. Aqui você paga apenas R$19 por contrato.</p>
+              <p className="text-slate-600">Advogados cobram R$500 a R$2.000+ por contrato. Aqui você paga apenas R$29 por contrato.</p>
             </div>
             <div className="p-6 rounded-2xl border border-purple-100 hover:border-purple-200 hover:shadow-lg transition-all">
               <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-4">
@@ -283,7 +283,7 @@ export default function LandingPage() {
               </span>
               <h3 className="text-lg font-medium text-slate-600 mb-2">Avulso</h3>
               <div className="mb-4">
-                <span className="text-4xl font-bold text-slate-900">R$19</span>
+                <span className="text-4xl font-bold text-slate-900">R$29</span>
                 <span className="text-slate-500">/contrato</span>
               </div>
               <p className="text-slate-600 text-sm mb-6">Sem mensalidade. Pague só pelo que usar.</p>
@@ -299,14 +299,14 @@ export default function LandingPage() {
                 </li>
               </ul>
               <Link href="/create?plan=avulso" className="block w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-center hover:shadow-lg transition-shadow">
-                Começar por R$19/contrato
+                Começar por R$29/contrato
               </Link>
             </div>
             {/* Mensal */}
             <div className="p-6 rounded-2xl border border-slate-200 bg-white">
               <h3 className="text-lg font-medium text-slate-600 mb-2">Mensal</h3>
               <div className="mb-4">
-                <span className="text-4xl font-bold text-slate-900">R$49</span>
+                <span className="text-4xl font-bold text-slate-900">R$79</span>
                 <span className="text-slate-500">/mês</span>
               </div>
               <p className="text-slate-600 text-sm mb-2">Contratos ilimitados. Acesso total.</p>
@@ -329,7 +329,7 @@ export default function LandingPage() {
                 </li>
               </ul>
               <Link href="/create?plan=mensal" className="block w-full py-3 rounded-xl border border-purple-200 text-purple-700 font-medium text-center hover:bg-purple-50 transition-colors">
-                Começar por R$49/mês
+                Começar por R$79/mês
               </Link>
             </div>
           </div>

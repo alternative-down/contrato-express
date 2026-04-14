@@ -42,7 +42,7 @@ export default function TermosPage() {
             <h2>3. Planos e Pagamentos</h2>
             <ul>
               <li><strong>Avulso:</strong> R$ 19/contrato — acesso a todos os templates, download em PDF</li>
-              <li><strong>Mensal:</strong> R$ 49/mês — contratos ilimitados, swap de templates, histórico, suporte prioritário</li>
+              <li><strong>Mensal:</strong> R$ 79/mês — contratos ilimitados, swap de templates, histórico, suporte prioritário</li>
             </ul>
             <p>Cobranças processadas via Asaas. Assinatura renovada automaticamente. Cancelamento a qualquer momento.</p>
           </section>
