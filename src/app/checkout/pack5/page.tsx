@@ -108,7 +108,7 @@ export default function CheckoutPack5Page() {
                 <span className="text-green-600 font-semibold">Você economiza R$ 16</span>
               </div>
               <div className="mt-1 text-purple-600 font-medium text-sm">
-                R$ 15,80 por contrato (vs R$ 19 no Basic)
+                R$ 15,80 por contrato (vs R$ 29 no Basic)
               </div>
             </div>
 
@@ -188,7 +188,7 @@ export default function CheckoutPack5Page() {
               },
               {
                 q: "O que acontece quando acabarem os créditos?",
-                a: "Você compra outro Pack 5 ou usa o plano por contrato (R$ 19/contrato).",
+                a: "Você compra outro Pack 5 ou usa o plano por contrato (R$ 29/contrato).",
               },
             ].map(({ q, a }) => (
               <details key={q} className="group">

@@ -163,7 +163,7 @@ export default function LandingPage() {
               </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Prestação de Serviços</h3>
               <p className="text-slate-600 text-sm">Contrato geral para prestação de serviços profissionais.</p>
-              <div className="mt-4 text-sm font-medium text-purple-600">R$ 19/contrato</div>
+              <div className="mt-4 text-sm font-medium text-purple-600">R$ 29/contrato</div>
               <Link href="/create?template=services" className="mt-3 block w-full py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium text-center hover:shadow-lg transition-shadow text-sm">
                 Usar Template
               </Link>
@@ -174,7 +174,7 @@ export default function LandingPage() {
               </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Freelance / Projeto</h3>
               <p className="text-slate-600 text-sm">Contrato para projetos pontuais com escopo definido.</p>
-              <div className="mt-4 text-sm font-medium text-pink-600">R$ 19/contrato</div>
+              <div className="mt-4 text-sm font-medium text-pink-600">R$ 29/contrato</div>
               <Link href="/create?template=freelance" className="mt-3 block w-full py-2.5 rounded-lg border border-pink-200 text-pink-700 font-medium text-center hover:bg-pink-50 transition-colors text-sm">
                 Usar Template
               </Link>
@@ -185,7 +185,7 @@ export default function LandingPage() {
               </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Retainer</h3>
               <p className="text-slate-600 text-sm">Contrato de retainer para trabalhos recorrentes.</p>
-              <div className="mt-4 text-sm font-medium text-blue-600">R$ 19/contrato</div>
+              <div className="mt-4 text-sm font-medium text-blue-600">R$ 29/contrato</div>
               <Link href="/create?template=retainer" className="mt-3 block w-full py-2.5 rounded-lg border border-blue-200 text-blue-700 font-medium text-center hover:bg-blue-50 transition-colors text-sm">
                 Usar Template
               </Link>

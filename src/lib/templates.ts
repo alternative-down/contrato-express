@@ -8,7 +8,7 @@ export const TEMPLATES = [
     description: 'Contrato geral para prestação de serviços entre prestador e contratante.',
     category: 'Contratos Gerais',
     planType: 'basic',
-    price: 19,
+    price: 29,
     fields: [
       { name: 'prestador_nome', label: 'Nome do Prestador', type: 'text', required: true },
       { name: 'prestador_cpf', label: 'CPF do Prestador', type: 'cpf', required: true },
@@ -67,7 +67,7 @@ CNPJ: [CONTRATANTE_CNPJ]`,
     description: 'Contrato para trabalhos freelancers com definição clara de escopo e prazos.',
     category: 'Trabalho Freelance',
     planType: 'basic',
-    price: 19,
+    price: 29,
     fields: [
       { name: 'freelancer_nome', label: 'Nome do Freelancer', type: 'text', required: true },
       { name: 'freelancer_cpf', label: 'CPF do Freelancer', type: 'cpf', required: true },
@@ -175,7 +175,7 @@ ______________________________
     description: 'Acordo de não divulgação para proteger informações confidenciais.',
     category: 'NDA e Confidencialidade',
     planType: 'basic',
-    price: 19,
+    price: 29,
     fields: [
       { name: 'revelador_nome', label: 'Nome da Parte Reveladora', type: 'text', required: true },
       { name: 'revelador_documento', label: 'CPF ou CNPJ', type: 'text', required: true },

@@ -154,7 +154,7 @@ export default function PricingPage() {
               <h2 className="text-lg font-semibold text-slate-900 mb-1">Contrato Avulso</h2>
               <p className="text-slate-500 text-sm mb-4">Pague apenas pelo que precisa</p>
               <div className="mb-6">
-                <span className="text-3xl font-bold text-slate-900">R$ 19</span>
+                <span className="text-3xl font-bold text-slate-900">R$ 29</span>
                 <span className="text-slate-500 text-sm"> / contrato</span>
               </div>
               <ul className="space-y-2 mb-6">
@@ -172,7 +172,7 @@ export default function PricingPage() {
                 </li>
               </ul>
               <Link href="/templates" className="block w-full py-3 text-center border border-purple-200 text-purple-700 font-semibold rounded-xl hover:bg-purple-50 transition text-sm">
-                Comprar por R$ 19
+                Comprar por R$ 29
               </Link>
             </div>
           </div>
