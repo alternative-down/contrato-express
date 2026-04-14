@@ -39,7 +39,7 @@ export default function TemplatesPage() {
         <div className="mb-12">
           <h2 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-purple-500"></span>
-            Plano Basic — R$ 19
+            Plano Basic — R$ 29
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {basicTemplates.map((template) => (
@@ -48,7 +48,7 @@ export default function TemplatesPage() {
                 <h3 className="font-semibold text-slate-900 mt-3 mb-1">{template.name}</h3>
                 <p className="text-sm text-slate-500 mb-4">{template.description}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-lg font-bold text-slate-900">R$ 19</span>
+                  <span className="text-lg font-bold text-slate-900">R$ 29</span>
                   <span className="text-sm font-medium text-purple-600">Usar template →</span>
                 </div>
               </Link>
