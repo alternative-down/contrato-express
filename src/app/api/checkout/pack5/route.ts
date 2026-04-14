@@ -11,6 +11,7 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
 const PACK5_AMOUNT = 79;
 const PACK5_DESCRIPTION = 'Pack 5 Contratos — Contrato Express';
+const PACK5_CREDITS = 5;
 
 async function createAsaasCustomerIfNeeded(user: { id: string; email: string; name?: string | null; asaasCustomerId?: string | null }) {
   if (user.asaasCustomerId) return user.asaasCustomerId;
@@ -106,11 +107,12 @@ export async function POST(request: NextRequest) {
 
     const asaasData = await asaasResponse.json();
 
-    // Store order in DB — contractId null for prepaid pack
+    // Store order in DB — contractId null for prepaid pack, orderType = 'pack5'
     await db.insert(orders).values({
       id: orderId,
       userId: user.id,
       contractId: null,
+      orderType: 'pack5',
       amount: PACK5_AMOUNT,
       status: 'pending',
       asaasPaymentId: asaasData.id,
@@ -133,6 +135,7 @@ export async function POST(request: NextRequest) {
       paymentId: asaasData.id,
       orderId,
       amount: PACK5_AMOUNT,
+      credits: PACK5_CREDITS,
       pix: pixData ? {
         encodedImage: pixData.encodedImage || null,
         payload: pixData.payload || pixData.qrCode || null,

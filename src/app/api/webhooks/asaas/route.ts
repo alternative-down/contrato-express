@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
-import { orders, contracts } from '@/db/schema';
+import { orders, contracts, users } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
 const ASAAS_WEBHOOK_TOKEN = process.env.ASAAS_WEBHOOK_TOKEN || '';
@@ -21,7 +21,7 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {
-    // FIX #14.4: Validate webhook token
+    // Validate webhook token
     if (ASAAS_WEBHOOK_TOKEN) {
       const token = request.headers.get('asaas-signature');
       if (token !== ASAAS_WEBHOOK_TOKEN) {
@@ -55,9 +55,11 @@ async function handlePaymentConfirmed(event: AsaasEvent) {
   const paymentId = event.payment.id;
   const externalReference = event.payment.externalReference;
 
-  // Find the order by contractId (externalReference) or payment ID
+  // Find the order by payment ID or contractId (externalReference)
   let order;
   if (externalReference) {
+    // Pack5 orders have externalReference = `pack5:${orderId}:user_${userId}`
+    // Template orders have externalReference = contractId
     const result = await db
       .select()
       .from(orders)
@@ -80,25 +82,39 @@ async function handlePaymentConfirmed(event: AsaasEvent) {
     return;
   }
 
-  // Update order status to paid and record paidAt timestamp
+  // Update order status to paid
   await db
     .update(orders)
     .set({ status: 'paid', paidAt: new Date() })
     .where(eq(orders.id, order.id));
 
-  // FIX #14.4: Mark contract as completed (was 'paid' before, now 'completed')
-  // Skip for pack5/prepaid orders that have no associated contract
+  // Mark contract as completed (skip for pack5/prepaid orders that have no contractId)
   if (order.contractId) {
     await db
       .update(contracts)
-      .set({
-        status: 'completed',
-        updatedAt: new Date(),
-      })
+      .set({ status: 'completed', updatedAt: new Date() })
       .where(eq(contracts.id, order.contractId));
-    console.log(`[Asaas Webhook] Order ${order.id} marked as paid. Contract ${order.contractId} marked as completed.`);
+    console.log(`[Asaas Webhook] Order ${order.id} paid. Contract ${order.contractId} completed.`);
   } else {
-    console.log(`[Asaas Webhook] Order ${order.id} marked as paid. Pack5/prepaid — no contract to update.`);
+    console.log(`[Asaas Webhook] Order ${order.id} paid. Pack5 — no contract to update.`);
+  }
+
+  // FIX #196: Add Pack 5 credits when Pack5 payment is confirmed
+  if (order.orderType === 'pack5') {
+    // Get current user credits
+    const userResult = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, order.userId))
+      .limit(1);
+    const user = userResult[0];
+    const currentCredits = user?.packCredits ?? 0;
+
+    await db
+      .update(users)
+      .set({ packCredits: currentCredits + 5 })
+      .where(eq(users.id, order.userId));
+    console.log(`[Asaas Webhook] Order ${order.id} (Pack5) — added 5 credits to user ${order.userId}. Total: ${currentCredits + 5}`);
   }
 }
 
@@ -136,6 +152,6 @@ async function handlePaymentOverdue(event: AsaasEvent) {
       .update(orders)
       .set({ status: 'cancelled' })
       .where(eq(orders.id, order.id));
-    console.log(`[Asaas Webhook] Order ${order.id} marked as cancelled (overdue).`);
+    console.log(`[Asaas Webhook] Order ${order.id} cancelled (overdue).`);
   }
 }

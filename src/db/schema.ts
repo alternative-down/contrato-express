@@ -10,6 +10,8 @@ export const users = sqliteTable('users', {
   copyLimit: integer('copy_limit').default(10),
   // Asaas customer ID — created on signup, used for all payments
   asaasCustomerId: text('asaas_customer_id'),
+  // Pack credits: number of individual contracts remaining from Pack 5 purchases
+  packCredits: integer('pack_credits').default(0),
   createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
 });
 
@@ -31,6 +33,8 @@ export const orders = sqliteTable('orders', {
   id: text('id').primaryKey(),
   userId: text('user_id').notNull(),
   contractId: text('contract_id'), // nullable for pack5/prepaid orders
+  // For Pack 5 orders: 'pack5' | 'subscription' | null
+  orderType: text('order_type').default('subscription'),
   amount: real('amount').notNull(),
   status: text('status').default('pending'), // 'pending' | 'paid' | 'cancelled' | 'refunded'
   asaasPaymentId: text('asaas_payment_id'),
