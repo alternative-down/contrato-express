@@ -21,9 +21,14 @@ export default function HistoryPage() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  useEffect(() => {
+  function loadContracts() {
+    setLoading(true);
+    setError(null);
     fetch('/api/contracts', { credentials: 'include' })
-      .then(r => r.json())
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
       .then(d => {
         setContracts(d.contracts || []);
         setLoading(false);
@@ -33,21 +38,14 @@ export default function HistoryPage() {
         setLoading(false);
         setError('Não foi possível carregar o histórico. Tente novamente.');
       });
+  }
+
+  useEffect(() => {
+    loadContracts();
   }, []);
 
   function reload() {
-    setLoading(true);
-    setError(null);
-    fetch('/api/contracts', { credentials: 'include' })
-      .then(r => r.json())
-      .then(d => {
-        setContracts(d.contracts || []);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        setError('Não foi possível carregar o histórico. Tente novamente.');
-      });
+    loadContracts();
   }
 
   const formatDate = (dateStr: string) => {
