@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { GraduationCap, Shield, CreditCard, FileText, Check, HelpCircle, Users, CreditCardIcon, Undo, Headphones, ShieldCheck, Lock } from "lucide-react"
+import { SocialProofSection } from '@/components/SocialProofSection';
 
 export default function LandingPage() {
   return (
@@ -55,16 +56,7 @@ export default function LandingPage() {
           </div>
 
           {/* Social Proof Counter */}
-          <div className="mt-8 inline-flex items-center gap-2 bg-white/60 border border-purple-100 rounded-full px-5 py-2">
-            <div className="flex -space-x-2">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 border-2 border-white flex items-center justify-center text-white text-xs">👩</div>
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 border-2 border-white flex items-center justify-center text-white text-xs">👨</div>
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-pink-400 to-orange-400 border-2 border-white flex items-center justify-center text-white text-xs">🧑</div>
-            </div>
-            <span className="text-sm text-slate-700">
-              Contratos gerados por freelancers e autônomos brasileiros
-            </span>
-          </div>
+          <SocialProofSection />
 
           {/* Trust Bar — Design spec: generated/doc/contrato-express-trust-bar-design-spec.firm */}
           <div className="mt-8 bg-gray-50 py-6 px-4 rounded-2xl">
