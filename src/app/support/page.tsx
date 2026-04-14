@@ -12,7 +12,7 @@ const faqItems = [
   {
     question: 'Preciso pagar para usar?',
     answer:
-      'Não. Você começa com 3 contratos gratuitos. Depois, cada contrato adicional custa R$19.',
+      'Não. Você começa com 3 contratos gratuitos. Depois, cada contrato adicional custa R$ 29.',
   },
   {
     question: 'O suporte responde por onde?',
