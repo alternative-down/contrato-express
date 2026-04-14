@@ -64,6 +64,15 @@ export default async function ProtectedAppPage() {
             <span className="font-bold text-slate-900">Contrato Express</span>
           </div>
           <div className="flex items-center gap-4">
+            {/* Show Pack credits if user has any */}
+            {(user.packCredits ?? 0) > 0 && (
+              <div className="flex items-center gap-1.5 bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+                {user.packCredits} créditos
+              </div>
+            )}
             <span className="text-sm text-slate-600">{user.email}</span>
             <Link href="/history" className="text-sm font-medium text-purple-600 hover:text-purple-700">
               Histórico
@@ -80,6 +89,23 @@ export default async function ProtectedAppPage() {
           <h1 className="text-2xl font-bold text-slate-900">Meus Contratos</h1>
           <p className="mt-1 text-slate-500">Bem-vindo, {user.name || user.email}</p>
         </div>
+
+        {/* Pack credits banner */}
+        {(user.packCredits ?? 0) > 0 && (
+          <div className="mb-8 rounded-xl border border-purple-200 bg-purple-50 p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-semibold text-purple-900">💳 Pack 5 Contratos</p>
+                <p className="text-sm text-purple-700 mt-0.5">
+                  Você tem <strong>{user.packCredits} créditos</strong> de contrato avulso disponíveis
+                </p>
+              </div>
+              <Link href="/templates" className="shrink-0 rounded-lg bg-purple-600 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-700 transition">
+                Criar contrato
+              </Link>
+            </div>
+          </div>
+        )}
 
         {recentContracts.length > 0 ? (
           <div className="space-y-4 mb-8">
